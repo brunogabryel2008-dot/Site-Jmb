@@ -50,10 +50,12 @@
 
   function iniciarYT(){
     if (!document.getElementById('pkg-yt')) { return; }
+    if (!/^https?:$/.test(location.protocol)) { return; }
     carregarYT(function(){
       if (!document.getElementById('pkg-yt')) { return; }
       ytAtual = new YT.Player('pkg-yt', {
         events: {
+          onError: function(){ falhaYT(); },
           onReady: function(e){ garantirVolume(e.target); e.target.playVideo(); },
           onStateChange: function(e){ if (e.data === 1) { garantirVolume(e.target); } }
         }
@@ -66,15 +68,47 @@
     ytAtual = null;
   }
 
+  var ytLink = '';
+  function botaoYT(link){
+    return '<a href="' + link + '" target="_blank" rel="noopener" '
+      + 'style="color:#fff;text-decoration:none;border:1px solid #fff;padding:12px 20px;font-size:13px;">'
+      + '&#9654; Assistir o v\u00eddeo no YouTube</a>';
+  }
+  function falhaYT(){
+    var box = document.querySelector('#pkg-modal .pkg-video');
+    if (!box || !ytLink) { return; }
+    box.style.display = 'flex'; box.style.alignItems = 'center'; box.style.justifyContent = 'center';
+    box.innerHTML = botaoYT(ytLink);
+  }
+
   function montarVideo(k){
     var v = VIDEOS[k];
     if (!v || v.indexOf('COLE_AQUI') === 0) { return ''; }
     var vertical = false;
     if (typeof v === 'object') { vertical = !!v.vertical; v = v.url; }
+    /* Arquivo de video proprio (ex.: 'videos/essencial.mp4'): toca dentro do site em qualquer situacao */
+    if (/\.(mp4|webm|mov)(\?.*)?$/i.test(v)) {
+      return '<div class="pkg-video' + (vertical ? ' vertical' : '') + '">'
+        + '<video src="' + v + '" controls autoplay playsinline preload="metadata" '
+        + 'style="position:absolute;top:0;left:0;width:100%;height:100%;background:#000;"></video></div>';
+    }
     var ehYT = /youtube\.com\/embed|youtube-nocookie\.com\/embed/.test(v);
+    var online = /^https?:$/.test(location.protocol);
+
+    /* Aberto direto do computador (file://): o YouTube bloqueia o player (erro 153).
+       Mostramos um botao para assistir no YouTube. Online (GitHub Pages) o player funciona. */
+    if (ehYT && !online) {
+      var idm = v.match(/embed\/([\w-]{6,})/);
+      var link = idm ? 'https://www.youtube.com/watch?v=' + idm[1] : v;
+      return '<div class="pkg-video" style="display:flex;align-items:center;justify-content:center;">' + botaoYT(link) + '</div>';
+    }
+
     if (ehYT) {
+      var idv = v.match(/embed\/([\w-]{6,})/);
+      ytLink = idv ? 'https://www.youtube.com/watch?v=' + idv[1] : v;
       v += (v.indexOf('?') === -1 ? '?' : '&')
-        + 'controls=0&autoplay=1&rel=0&playsinline=1&cc_load_policy=0&iv_load_policy=3&enablejsapi=1&origin=' + encodeURIComponent(location.origin);
+        + 'controls=0&autoplay=1&rel=0&playsinline=1&cc_load_policy=0&iv_load_policy=3&enablejsapi=1'
+        + (location.origin && location.origin !== 'null' ? '&origin=' + encodeURIComponent(location.origin) : '');
     }
     return '<div class="pkg-video' + (vertical ? ' vertical' : '') + '">'
       + '<iframe' + (ehYT ? ' id="pkg-yt"' : '') + ' src="' + v + '" title="YouTube video player"'
