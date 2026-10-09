@@ -210,3 +210,36 @@ iframe.skiptranslate, .goog-te-banner-frame{ display:none !important; }
   .port-side{ grid-template-columns:1fr; }
   .feat{ grid-template-columns:1fr; }
 }
+
+/* ---- Ajuste de enquadramento das fotos no celular ---- */
+@media (max-width:760px){
+
+  /* Remove alturas "esticadas" que cortavam a foto */
+  .port-big,
+  .port-small{
+    height:auto;
+    min-height:0;
+    width:100%;
+  }
+
+  /* Foto do casal (Encontros): centralizada */
+  .port-big{
+    aspect-ratio:1/1;
+  }
+  .img-port1{
+    background-position:50% 30%;
+  }
+
+  /* Foto do bolo (Tempo de celebrar): mostra o rosto e o bolo */
+  .port-small{
+    aspect-ratio:4/5;
+  }
+  .img-port3{
+    background-position:50% 0%;
+  }
+
+  /* Foto "Pequenos gestos" */
+  .img-port2{
+    background-position:50% 20%;
+  }
+}
