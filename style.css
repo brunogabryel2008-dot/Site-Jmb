@@ -5,9 +5,9 @@
    ===================================================== */
 .img.img-hero{ background-image:url('hero.jpg'); background-position:center 40%; }       /* foto grande do topo */
 .img-sobre{ background-image:url('img/sobre.jpg'); }      /* foto da seção "Não é só sobre registrar" */
-.img-port1{ background-image:url('img/portfolio-1.jpg'); }      /* portfólio: foto grande */
-.img-port2{ background-image:url('img/portfolio-2.jpg'); }      /* portfólio: pequena de cima */
-.img-port3{ background-image:url('img/portfolio-3.jpg'); }      /* portfólio: pequena de baixo */
+.img-port1{ background-image:url('portfolio-1.jpg'); background-position:center 35%; }      /* portfólio: foto grande */
+.img-port2{ background-image:url('portfolio-2.jpg'); background-position:center 38%; }      /* portfólio: pequena de cima */
+.img-port3{ background-image:url('portfolio-3.jpg'); background-position:center 25%; }      /* portfólio: pequena de baixo */
 
 :root{
   --black:#0f0f0f;
