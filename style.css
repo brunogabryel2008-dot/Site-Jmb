@@ -3,7 +3,7 @@
 /* =====================================================
    SUAS IMAGENS: coloque os arquivos na pasta img/ com estes nomes
    ===================================================== */
-.img-hero{ background-image:url('img/hero.jpg'); }       /* foto grande do topo */
+.img.img-hero{ background-image:url('img/hero.jpg'); background-position:center 40%; }       /* foto grande do topo */
 .img-sobre{ background-image:url('img/sobre.jpg'); }      /* foto da seção "Não é só sobre registrar" */
 .img-port1{ background-image:url('img/portfolio-1.jpg'); }      /* portfólio: foto grande */
 .img-port2{ background-image:url('img/portfolio-2.jpg'); }      /* portfólio: pequena de cima */
