@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JMB Fotos &amp; Vídeos</title>
+<meta name="description" content="JMB Fotos e Vídeos: fotografia e vídeo com autenticidade. Conheça nossos pacotes.">
+<link rel="icon" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjIRbqVxZ-kJAf3gJgOKojvkYNcmQ-9epg1K8ZihA4qPon3kScQaqWUqIuBSkQU33UIYD9py1k9dDQ292YeC6JsTE7YKjeWunvCHsVlQLn0vv_N0h3t_7YD0WFgcVcQHnSR8tdOqGxW9Dvlb_d574dF9qbsjhn4UB88vsaStkCxvJu5WQb7BgsZs_BfhRU/s1691/JMBv1.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&amp;family=Poppins:wght@300;400;500;600&amp;display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="index home">
+<div id="outer-wrapper">
+
+  <!-- CABEÇALHO -->
+  <div id="header-wrap">
+    <div class="wrap bar">
+      <div class="logo">
+        <h1><a href="index.html">JMB Fotos &amp; Vídeos</a></h1>
+        <a href="index.html"><img alt="JMB Fotos e Vídeos" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjIRbqVxZ-kJAf3gJgOKojvkYNcmQ-9epg1K8ZihA4qPon3kScQaqWUqIuBSkQU33UIYD9py1k9dDQ292YeC6JsTE7YKjeWunvCHsVlQLn0vv_N0h3t_7YD0WFgcVcQHnSR8tdOqGxW9Dvlb_d574dF9qbsjhn4UB88vsaStkCxvJu5WQb7BgsZs_BfhRU/s1691/JMBv1.png"></a>
+      </div>
+      <nav class="menu">
+        <a href="#sobre">Sobre a JMB</a>
+        <a href="#pacotes">Nossos pacotes</a>
+        <a href="#portfolio">Portfólio</a>
+        <a class="btn-line" href="#contato">Vamos conversar</a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="dark hero">
+    <div class="wrap">
+      <div class="eyebrow">JMB Fotos e Vídeos &#8226; Cada momento importa</div>
+      <div class="hero-top">
+        <h2>O instante passa.<br>A emoção fica.</h2>
+        <div class="hero-side">
+          Julie | Bruno | Mariana &#8212; Registramos o seu momento com autenticidade.
+          <br><a class="btn-white" href="#pacotes">Conheça nossos pacotes <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+      <div class="img img-hero hero-img"></div>
+      <div class="hero-cap"><span>Imagem ilustrativa &#8212; portfólio em atualização</span><span>Fotografia &amp; vídeo com autenticidade</span></div>
+    </div>
+  </section>
+
+  <!-- SOBRE -->
+  <section class="sobre" id="sobre">
+    <div class="wrap sobre-grid">
+      <div>
+        <div class="eyebrow">Nosso olhar</div>
+        <h2>Não é só sobre registrar. É sobre sentir de novo.</h2>
+        <p>Somos Julie, Bruno e Mariana, na JMB Fotos e Vídeos, fotografia e vídeo se encontram para guardar a essência do seu momento &#8212; dos pequenos gestos à emoção de celebrar.</p>
+        <div class="feat">
+          <div><b>Presença na medida</b><span>Um olhar atento para os momentos que acontecem naturalmente.</span></div>
+          <div><b>Cuidado em cada entrega</b><span>Da captação à edição, uma narrativa feita para ser revivida.</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="img img-sobre sobre-img"></div>
+        <div class="caption" style="margin-top:8px;">Imagem ilustrativa &#8212; a ser trocada por foto da equipe.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PACOTES -->
+  <section class="pacotes" id="pacotes">
+    <div class="wrap">
+      <div class="pac-head">
+        <div>
+          <div class="eyebrow">Escolha seu registro</div>
+          <h2>Nossos Pacotes</h2>
+        </div>
+        <p>Do encontro íntimo à grande celebração: encontre a cobertura que combina com o seu evento.</p>
+      </div>
+
+      <div class="pac-tools">
+        <div class="pkg-tabs" role="tablist">
+          <button aria-selected="true" class="pkg-tab active" data-tab="fotos" role="tab" type="button"><i class="fa-solid fa-camera"></i>Fotografia</button>
+          <button aria-selected="false" class="pkg-tab" data-tab="videos" role="tab" type="button"><i class="fa-solid fa-video"></i>Vídeo</button>
+        </div>
+        <div class="header-search">
+          <form action="/search" class="search-form" method="get">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input class="search-input" name="q" placeholder="Buscar pacote" type="search">
+            <button id="search-submit" type="submit">Buscar</button>
+          </form>
+        </div>
+      </div>
+
+      <p class="pkg-empty pkg-hide" id="pkg-empty"></p>
+      <div class="pkg-results pkg-hide" id="pkg-results"></div>
+      <div class="pkg-panel" data-panel="fotos"></div>
+      <div class="pkg-panel pkg-hide" data-panel="videos"></div>
+
+      <div class="pac-foot">
+        <span>Reserva com 30% &#8226; Pix ou dinheiro &#8226; Condições completas em &#8220;Saiba mais&#8221;.</span>
+        <span>Tem uma ideia diferente? <a href="https://ig.me/m/_.jmb.r" rel="noopener" target="_blank">Fale com a JMB</a></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFÓLIO -->
+  <section class="dark port" id="portfolio">
+    <div class="wrap">
+      <div class="port-head">
+        <div>
+          <div class="eyebrow">Portfólio</div>
+          <h2>Histórias que merecem ser lembradas.</h2>
+        </div>
+        <div>
+          <p>Um universo de encontros, detalhes e celebrações. Nosso portfólio está sendo atualizado.</p>
+          <span class="caption">Imagens ilustrativas &#8212; portfólio em atualização</span>
+        </div>
+      </div>
+      <div class="port-grid">
+        <div>
+          <div class="img img-port1 port-big"></div>
+          <div class="port-lab">Encontros <span>Casamentos &amp; celebrações</span></div>
+        </div>
+        <div class="port-side">
+          <div><div class="img img-port2 port-small"></div><div class="port-lab">Pequenos gestos</div></div>
+          <div><div class="img img-port3 port-small"></div><div class="port-lab">Tempo de celebrar</div></div>
+        </div>
+      </div>
+      <div class="port-ig">
+        <span>Acompanhe as novidades e converse com a gente no Instagram.</span>
+        <a class="btn-line2" href="https://www.instagram.com/_.jmb.r" rel="noopener" target="_blank">Instagram &#8226; @_.jmb.r</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section class="contato" id="contato">
+    <div class="wrap contato-grid">
+      <div>
+        <div class="eyebrow">Vamos conversar</div>
+        <h2>O próximo capítulo é o seu.</h2>
+        <p>Conte para a gente onde, quando e o que você quer celebrar. Vamos encontrar o pacote ideal para o seu momento.</p>
+      </div>
+      <div>
+        <a class="ct" href="https://www.instagram.com/_.jmb.r?stkn=a2IzY2NzaXNjODF0&amp;utm_source=qr" rel="noopener" target="_blank"><div><b>Instagram</b><span>@_.jmb.r</span></div><i class="fa-brands fa-instagram"></i></a>
+        <a class="ct" href="https://wa.me/55SEUNUMERO" rel="noopener" target="_blank"><div><b>WhatsApp</b><span>Mande a sua mensagem</span></div><i class="fa-brands fa-whatsapp"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Janela "Saiba mais" -->
+  <div aria-hidden="true" class="pkg-modal" id="pkg-modal">
+    <div class="pkg-backdrop" data-close="1"></div>
+    <div aria-modal="true" class="pkg-dialog" role="dialog">
+      <button aria-label="Fechar" class="pkg-close" data-close="1" type="button">&#215;</button>
+      <div id="pkg-modal-body"></div>
+    </div>
+  </div>
+
+  <!-- RODAPÉ -->
+  <div id="footer-wrapper">
+    <div class="wrap">
+      <div class="foot">
+        <div class="foot-brand">
+          <img alt="JMB" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjIRbqVxZ-kJAf3gJgOKojvkYNcmQ-9epg1K8ZihA4qPon3kScQaqWUqIuBSkQU33UIYD9py1k9dDQ292YeC6JsTE7YKjeWunvCHsVlQLn0vv_N0h3t_7YD0WFgcVcQHnSR8tdOqGxW9Dvlb_d574dF9qbsjhn4UB88vsaStkCxvJu5WQb7BgsZs_BfhRU/s1691/JMBv1.png">
+          <div><span>JMB Fotos e Vídeos</span><small>O instante passa. A emoção fica.</small></div>
+        </div>
+        <ul class="foot-social">
+          <li><a href="https://www.instagram.com/_.jmb.r?stkn=a2IzY2NzaXNjODF0&amp;utm_source=qr" rel="noopener" target="_blank"><i class="fa-brands fa-instagram"></i> Instagram</a></li>
+          <li><a href="https://wa.me/55SEUNUMERO" rel="noopener" target="_blank"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a></li>
+        </ul>
+      </div>
+      <div class="foot-bottom">
+        <span>&#169; 2026 JMB Fotos &amp; Vídeos &#8212; @_.JMB.r</span>
+        <div class="jmb-lang notranslate" translate="no">
+          <i class="fa-solid fa-globe"></i>
+          <select aria-label="Idioma" id="jmb-lang-select">
+            <option value="pt">Português (Brasil)</option>
+            <option value="en">English</option>
+            <option value="es">Español</option>
+            <option value="fr">Français</option>
+            <option value="de">Deutsch</option>
+            <option value="it">Italiano</option>
+            <option value="nl">Nederlands</option>
+            <option value="pl">Polski</option>
+            <option value="da">Dansk</option>
+            <option value="no">Norsk</option>
+            <option value="fi">Suomi</option>
+            <option value="el">Ελληνικά</option>
+            <option value="iw">עברית</option>
+            <option value="fa">فارسی</option>
+            <option value="id">Bahasa Indonesia</option>
+            <option value="ms">Bahasa Melayu</option>
+            <option value="ja">日本語</option>
+            <option value="ko">한국어</option>
+          </select>
+        </div>
+      </div>
+      <div id="google_translate_element"></div>
+    </div>
+  </div>
+
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
