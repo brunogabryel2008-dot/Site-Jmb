@@ -222,12 +222,12 @@ iframe.skiptranslate, .goog-te-banner-frame{ display:none !important; }
     width:100%;
   }
 
-  /* Foto do casal (Encontros): centralizada */
+  /* Foto do casal (Encontros): formato mais baixo, sem ocupar a tela inteira */
   .port-big{
-    aspect-ratio:1/1;
+    aspect-ratio:4/3;
   }
   .img-port1{
-    background-position:60% 20%;
+    background-position:55% 45%;
   }
 
   /* Foto do bolo (Tempo de celebrar): mostra o rosto e o bolo */
@@ -238,8 +238,11 @@ iframe.skiptranslate, .goog-te-banner-frame{ display:none !important; }
     background-position:50% 0%;
   }
 
-  /* Foto "Pequenos gestos" */
-  .img-port2{
-    background-position:50% 20%;
+  /* Foto "Pequenos gestos" (Heitor): no formato original 3:4, aparece inteira, sem corte */
+  .port-small.img-port2{
+    aspect-ratio:3/4;
+  }
+  .img.img-port2{
+    background-position:center center;
   }
 }
