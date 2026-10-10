@@ -4,9 +4,9 @@
    SUAS IMAGENS: coloque os arquivos na pasta img/ com estes nomes
    ===================================================== */
 .img.img-hero{ background-image:url('hero.jpg'); background-position:center 40%; }       /* foto grande do topo */
-.img-sobre{ background-image:url('img/sobre.jpg'); }      /* foto da seção "Não é só sobre registrar" */
+.img.img-sobre{ background-image:url('sobre.jpg'); background-position:center 35%; filter:none; }      /* foto da seção "Não é só sobre registrar" (colorida) */
 .img-port1{ background-image:url('portfolio-1.jpg'); background-position:center 35%; }      /* portfólio: foto grande */
-.img-port2{ background-image:url('portfolio-2.jpg'); background-position:center 38%; }      /* portfólio: pequena de cima */
+.img.img-port2{ background-image:url('heitor.jpeg'); background-position:center 30%; filter:none; }      /* portfólio: pequena de cima (colorida) */
 .img-port3{ background-image:url('portfolio-3.jpg'); background-position:center 25%; }      /* portfólio: pequena de baixo */
 
 :root{
