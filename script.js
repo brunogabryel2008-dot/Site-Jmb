@@ -129,9 +129,13 @@
 
   var NOTA_STORIES = '<b>Sobre os pacotes</b>'
     + 'Stories editados e estratégicos para o seu evento.<br/><br/>'
-    + 'Eventos em outra cidade: taxa de locomoção por conta do cliente.<br/><br/>'
+    + 'Fora da cidade, cobra-se uma taxa de R$2,00 por km.<br/><br/>'
+    + 'Pagamento facilitado: 30% para reservar. O restante pode ser pago até 3 dias antes do evento, no Pix ou dinheiro.<br/><br/>'
     + 'Orçamento válido por 7 dias.<br/><br/>'
     + 'Para um trabalho de excelência, informe com antecedência onde, quando e qual pacote.';
+
+  /* Aviso que aparece em todos os pacotes (cartão e "Saiba mais") */
+  var AVISO_DIAS = 'Entregas em dias úteis';
 
   /* Grupos da aba StoryMakers (na ordem em que aparecem) */
   var GRUPOS = [
@@ -200,13 +204,13 @@
       'Duração: a combinar',
       'Entregas: stories postados pós-evento',
       'Incluso: até 9 stories editados e estratégicos para o seu evento',
-      'Em outra cidade: taxa cobrada para eventos fora da cidade',
+      'Fora da cidade: taxa de R$2,00 por km',
       'Prazo de entrega: 1 dia útil' ] },
     'st-qualquer-premium': { cat:'stories', grupo:'qualquer', nome:'Pacote Premium', preco:'R$690,00', itens:[
       'Duração: a combinar',
       'Entregas: stories em tempo real em múltiplos locais (making of | cerimônia | recepção)',
       'Incluso: 12 stories pós-evento',
-      'Em outra cidade: taxa cobrada para eventos fora da cidade',
+      'Fora da cidade: taxa de R$2,00 por km',
       'Prazo de entrega: 1 dia útil' ] },
 
     /* ---- StoryMakers: casamento civil ---- */
@@ -215,19 +219,19 @@
       'Entregas: stories em tempo real',
       'Incluso: até 5 stories editados e estratégicos para o seu evento em tempo real',
       'Locação: externa ou em estúdio',
-      'Em outra cidade: locomoção',
+      'Fora da cidade: taxa de R$2,00 por km',
       'Prazo de entrega: stories em tempo real, vídeo final em 2 dias úteis' ] },
     'st-civil-classico': { cat:'stories', grupo:'civil', nome:'Pacote Clássico', preco:'R$580,00', itens:[
       'Duração: a combinar',
       'Entregas: stories em tempo real + 2 vídeos editados com os melhores momentos (cerimônia | recepção)',
       'Incluso: até 8 stories editados e estratégicos para o seu evento',
-      'Em outra cidade: locomoção por conta do cliente',
+      'Fora da cidade: taxa de R$2,00 por km',
       'Prazo de entrega: stories em tempo real' ] },
     'st-civil-premium': { cat:'stories', grupo:'civil', nome:'Pacote Premium', preco:'R$730,00', itens:[
       'Duração: a combinar',
       'Entregas: stories em tempo real + 3 vídeos editados com os melhores momentos (making of | cerimônia | recepção)',
       'Incluso: até 14 stories editados e estratégicos para o seu evento',
-      'Em outra cidade: locomoção por conta do cliente',
+      'Fora da cidade: taxa de R$2,00 por km',
       'Prazo de entrega: 3 dias úteis' ] },
 
     /* ---- StoryMakers: eventos ---- */
@@ -282,6 +286,7 @@
     var nome = p.nome.replace('Pacote ', '');
     var lis = '';
     for (var i = 0; i < e.res.length; i++) { lis += '<li>' + e.res[i] + '</li>'; }
+    lis += '<li>' + AVISO_DIAS + '</li>';
     var rotulo = story ? 'StoryMaker &#8226; ' + tituloGrupo(p.grupo) : 'Coleção de ' + (foto ? 'foto' : 'vídeo');
     var icone = story ? 'fa-mobile-screen-button' : (foto ? 'fa-camera' : 'fa-video');
     return '<div class="pk"><div class="pk-top"><div class="row"><span>' + rotulo + '</span>'
@@ -363,6 +368,7 @@
     pararYT();
     var lis = '';
     for (var i = 0; i < p.itens.length; i++) { lis += '<li>' + p.itens[i] + '</li>'; }
+    lis += '<li>' + AVISO_DIAS + '</li>';
     var story = p.cat === 'stories';
     var nota = story ? NOTA_STORIES : (p.cat === 'vídeos') ? NOTA_VIDEOS : NOTA_FOTOS;
     msgAtual = story
