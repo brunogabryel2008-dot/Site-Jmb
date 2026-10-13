@@ -514,3 +514,39 @@
     location.reload();
   });
 })();
+
+/* ---- Animações leves: elementos aparecem ao rolar a página ---- */
+(function(){
+  if (!('IntersectionObserver' in window)) { return; }
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) { return; }
+
+  /* [seletor, atraso] — atraso 1 ou 2 deixa os itens entrando em sequência */
+  var ALVOS = [
+    ['.hero .eyebrow', 0], ['.hero-top h2', 0], ['.hero-side', 1], ['.hero-img', 2], ['.hero-cap', 2],
+    ['.sobre-grid > div:first-child', 0], ['.sobre-grid > div:last-child', 1],
+    ['.pac-head > div', 0], ['.pac-head p', 1], ['.pac-tools', 1], ['.pac-foot', 0],
+    ['.port-head > div:first-child', 0], ['.port-head > div:last-child', 1],
+    ['.port-grid > div:first-child', 0], ['.port-side > div:first-child', 1], ['.port-side > div:last-child', 2],
+    ['.port-ig', 0],
+    ['.contato-grid > div:first-child', 0], ['.contato-grid > div:last-child', 1],
+    ['.foot', 0]
+  ];
+
+  var obs = new IntersectionObserver(function(entradas){
+    for (var i = 0; i < entradas.length; i++) {
+      if (entradas[i].isIntersecting) {
+        entradas[i].target.className += ' visivel';
+        obs.unobserve(entradas[i].target);
+      }
+    }
+  }, { threshold:0.12, rootMargin:'0px 0px -40px 0px' });
+
+  for (var a = 0; a < ALVOS.length; a++) {
+    var els = document.querySelectorAll(ALVOS[a][0]);
+    for (var e = 0; e < els.length; e++) {
+      els[e].className += ' reveal' + (ALVOS[a][1] ? ' d' + ALVOS[a][1] : '');
+      obs.observe(els[e]);
+    }
+  }
+  document.documentElement.className += ' anim-on';
+})();

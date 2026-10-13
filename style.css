@@ -255,3 +255,48 @@ iframe.skiptranslate, .goog-te-banner-frame{ display:none !important; }
     background-position:center center;
   }
 }
+
+/* =====================================================
+   ANIMAÇÕES LEVES
+   ===================================================== */
+
+/* Elementos aparecem suavemente ao rolar a página
+   (só quando o JavaScript carregou, para nunca esconder conteúdo) */
+.anim-on .reveal{ opacity:0; transform:translateY(24px); transition:opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1); }
+.anim-on .reveal.visivel{ opacity:1; transform:none; }
+.anim-on .reveal.d1{ transition-delay:.12s; }
+.anim-on .reveal.d2{ transition-delay:.24s; }
+
+/* Cartões de pacote: sobem um pouco ao passar o mouse */
+.pk{ transition:transform .35s ease, box-shadow .35s ease, border-color .35s ease; }
+.pk:hover{ transform:translateY(-5px); box-shadow:0 14px 30px rgba(0,0,0,.10); border-color:#d0d0d0; }
+button.read-more i{ transition:transform .3s ease; }
+button.read-more:hover i{ transform:translateX(4px); }
+
+/* Cartões entram em sequência ao trocar de aba ou buscar */
+@keyframes jmbSobe{ from{ opacity:0; transform:translateY(16px); } to{ opacity:1; transform:none; } }
+.pkg-panel:not(.pkg-hide) .pk, .pkg-results:not(.pkg-hide) .pk{ animation:jmbSobe .55s cubic-bezier(.2,.7,.2,1) both; }
+.pkg-panel .pk:nth-child(2), .pkg-results .pk:nth-child(2){ animation-delay:.07s; }
+.pkg-panel .pk:nth-child(3), .pkg-results .pk:nth-child(3){ animation-delay:.14s; }
+.pkg-panel .pk:nth-child(4), .pkg-results .pk:nth-child(4){ animation-delay:.21s; }
+.pkg-panel .pk:nth-child(n+5), .pkg-results .pk:nth-child(n+5){ animation-delay:.28s; }
+
+/* Abas e botões: troca de cor suave */
+.pkg-tab, .menu a, .btn-white, .btn-line2, .ct, .foot-social a{ transition:background-color .3s ease, color .3s ease, opacity .3s ease, transform .3s ease; }
+.btn-white:hover{ transform:translateY(-2px); }
+.btn-white i{ transition:transform .3s ease; }
+.btn-white:hover i{ transform:translateX(4px); }
+.ct:hover{ opacity:.6; }
+
+/* Janela "Saiba mais": abre com fade e leve zoom */
+@keyframes jmbFade{ from{ opacity:0; } to{ opacity:1; } }
+@keyframes jmbZoom{ from{ opacity:0; transform:translateY(14px) scale(.97); } to{ opacity:1; transform:none; } }
+.pkg-modal.open .pkg-backdrop{ animation:jmbFade .3s ease both; }
+.pkg-modal.open .pkg-dialog{ animation:jmbZoom .4s cubic-bezier(.2,.7,.2,1) both; }
+
+/* Quem prefere menos movimento no aparelho: sem animações */
+@media (prefers-reduced-motion:reduce){
+  .anim-on .reveal{ opacity:1; transform:none; transition:none; }
+  .pk, .pk:hover, .btn-white:hover{ transform:none; }
+  .pkg-panel .pk, .pkg-results .pk, .pkg-modal.open .pkg-backdrop, .pkg-modal.open .pkg-dialog{ animation:none; }
+}
