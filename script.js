@@ -127,6 +127,24 @@
     + 'Pagamento facilitado: 30% para reservar. O restante pode ser pago até 3 dias antes do evento, no Pix ou dinheiro.<br/><br/>'
     + 'Para um trabalho de excelência, informe com antecedência onde, quando e qual pacote.';
 
+  var NOTA_STORIES = '<b>Sobre os pacotes</b>'
+    + 'Stories editados e estratégicos para o seu evento.<br/><br/>'
+    + 'Eventos em outra cidade: taxa de locomoção por conta do cliente.<br/><br/>'
+    + 'Orçamento válido por 7 dias.<br/><br/>'
+    + 'Para um trabalho de excelência, informe com antecedência onde, quando e qual pacote.';
+
+  /* Grupos da aba StoryMakers (na ordem em que aparecem) */
+  var GRUPOS = [
+    { id:'qualquer', titulo:'Qualquer tipo de evento' },
+    { id:'civil', titulo:'Casamento civil' },
+    { id:'eventos', titulo:'Eventos' },
+    { id:'infantil', titulo:'Infantil' }
+  ];
+  function tituloGrupo(id){
+    for (var i = 0; i < GRUPOS.length; i++) { if (GRUPOS[i].id === id) { return GRUPOS[i].titulo; } }
+    return '';
+  }
+
   var P = {
     'foto-mini': { cat:'fotos', nome:'Pacote Mini', preco:'R$150,00', itens:[
       '10 fotos editadas (à escolha do cliente)',
@@ -170,7 +188,68 @@
       'Incluso 2 drones + equipamentos profissionais',
       'Entrega dos storys em tempo real (storys limitados)',
       'Entrega do vídeo do evento em até 20 dias',
-      'Ideal para casamentos, aniversários e eventos corporativos' ] }
+      'Ideal para casamentos, aniversários e eventos corporativos' ] },
+
+    /* ---- StoryMakers: qualquer tipo de evento ---- */
+    'st-qualquer-inicial': { cat:'stories', grupo:'qualquer', nome:'Pacote Inicial', preco:'R$380,00', itens:[
+      'Duração: até 3 horas',
+      'Entregas: stories em tempo real do seu evento no Instagram',
+      'Incluso: até 5 stories editados e estratégicos para o seu evento, postados pós-evento',
+      'Prazo de entrega: 1 dia útil' ] },
+    'st-qualquer-classico': { cat:'stories', grupo:'qualquer', nome:'Pacote Clássico', preco:'R$530,00', itens:[
+      'Duração: a combinar',
+      'Entregas: stories postados pós-evento',
+      'Incluso: até 9 stories editados e estratégicos para o seu evento',
+      'Em outra cidade: taxa cobrada para eventos fora da cidade',
+      'Prazo de entrega: 1 dia útil' ] },
+    'st-qualquer-premium': { cat:'stories', grupo:'qualquer', nome:'Pacote Premium', preco:'R$690,00', itens:[
+      'Duração: a combinar',
+      'Entregas: stories em tempo real em múltiplos locais (making of | cerimônia | recepção)',
+      'Incluso: 12 stories pós-evento',
+      'Em outra cidade: taxa cobrada para eventos fora da cidade',
+      'Prazo de entrega: 1 dia útil' ] },
+
+    /* ---- StoryMakers: casamento civil ---- */
+    'st-civil-inicial': { cat:'stories', grupo:'civil', nome:'Pacote Inicial', preco:'R$390,00', itens:[
+      'Duração: 1 hora',
+      'Entregas: stories em tempo real',
+      'Incluso: até 5 stories editados e estratégicos para o seu evento em tempo real',
+      'Locação: externa ou em estúdio',
+      'Em outra cidade: locomoção',
+      'Prazo de entrega: stories em tempo real, vídeo final em 2 dias úteis' ] },
+    'st-civil-classico': { cat:'stories', grupo:'civil', nome:'Pacote Clássico', preco:'R$580,00', itens:[
+      'Duração: a combinar',
+      'Entregas: stories em tempo real + 2 vídeos editados com os melhores momentos (cerimônia | recepção)',
+      'Incluso: até 8 stories editados e estratégicos para o seu evento',
+      'Em outra cidade: locomoção por conta do cliente',
+      'Prazo de entrega: stories em tempo real' ] },
+    'st-civil-premium': { cat:'stories', grupo:'civil', nome:'Pacote Premium', preco:'R$730,00', itens:[
+      'Duração: a combinar',
+      'Entregas: stories em tempo real + 3 vídeos editados com os melhores momentos (making of | cerimônia | recepção)',
+      'Incluso: até 14 stories editados e estratégicos para o seu evento',
+      'Em outra cidade: locomoção por conta do cliente',
+      'Prazo de entrega: 3 dias úteis' ] },
+
+    /* ---- StoryMakers: eventos ---- */
+    'st-eventos-video': { cat:'stories', grupo:'eventos', nome:'Videomaker Mobile', preco:'R$500,00', itens:[
+      '1 vídeo editado com os melhores momentos',
+      'Duração: até 5 horas' ] },
+    'st-eventos-story': { cat:'stories', grupo:'eventos', nome:'Storymaker', preco:'R$600,00', itens:[
+      'Até 7 stories do evento em tempo real',
+      'Horário a combinar' ] },
+    'st-eventos-combo': { cat:'stories', grupo:'eventos', nome:'Combo Completo', preco:'R$900,00', itens:[
+      '1 vídeo com os melhores momentos',
+      'Stories em tempo real',
+      'Horário a combinar' ] },
+
+    /* ---- StoryMakers: infantil ---- */
+    'st-infantil-video': { cat:'stories', grupo:'infantil', nome:'Videomaker Mobile', preco:'R$400,00', itens:[
+      '1 vídeo editado com os melhores momentos' ] },
+    'st-infantil-story': { cat:'stories', grupo:'infantil', nome:'Storymaker', preco:'R$430,00', itens:[
+      'Até 6 stories do evento' ] },
+    'st-infantil-kids': { cat:'stories', grupo:'infantil', nome:'Pacote Kids', preco:'R$600,00', itens:[
+      '1 vídeo com os melhores momentos',
+      'Stories em tempo real' ] }
   };
 
   /* Textos curtos que aparecem nos cartões */
@@ -181,17 +260,32 @@
     'vid-simples': { sub:'O essencial do seu momento', res:['4 horas de cobertura','2 videomakers','Vídeo de 3 a 5 min','Até 10 dias úteis'], ideal:'Ideal para aniversário pequeno, festa simples e casamento civil.' },
     'vid-padrao': { sub:'Uma festa com mais detalhes', res:['6 horas + drone','2 videomakers','Making of + filme de 6 a 10 min','15 dias úteis'], ideal:'Ideal para 15 anos, bodas e casamento.' },
     'vid-essencial': { sub:'Para viver cada capítulo', res:['9 horas + drone','2 videomakers','Making of, filme e vídeo na íntegra','Até 15 dias'], ideal:'Making of vertical, filme e vídeo da cerimônia ou festa na íntegra.' },
-    'vid-duplo': { sub:'O evento por completo', res:['2 videomakers + 2 storymakers','2 drones','Storys em tempo real','Vídeo em até 20 dias'], ideal:'Ideal para casamentos, aniversários e eventos corporativos.' }
+    'vid-duplo': { sub:'O evento por completo', res:['2 videomakers + 2 storymakers','2 drones','Storys em tempo real','Vídeo em até 20 dias'], ideal:'Ideal para casamentos, aniversários e eventos corporativos.' },
+
+    'st-qualquer-inicial': { sub:'Stories em tempo real', res:['Até 3 horas','Stories em tempo real','Até 5 stories editados','Entrega em 1 dia útil'], ideal:'Para qualquer tipo de evento.' },
+    'st-qualquer-classico': { sub:'Stories pós-evento', res:['Duração a combinar','Stories pós-evento','Até 9 stories editados','Entrega em 1 dia útil'], ideal:'Para qualquer tipo de evento.' },
+    'st-qualquer-premium': { sub:'Tempo real em vários locais', res:['Duração a combinar','Making of | cerimônia | recepção','12 stories pós-evento','Entrega em 1 dia útil'], ideal:'Para qualquer tipo de evento.' },
+    'st-civil-inicial': { sub:'O essencial do seu "sim"', res:['1 hora','Stories em tempo real','Até 5 stories editados','Externa ou em estúdio'], ideal:'Vídeo final em 2 dias úteis.' },
+    'st-civil-classico': { sub:'Stories + melhores momentos', res:['Duração a combinar','Stories em tempo real','2 vídeos editados','Até 8 stories editados'], ideal:'Cerimônia e recepção.' },
+    'st-civil-premium': { sub:'Do making of à recepção', res:['Duração a combinar','Stories em tempo real','3 vídeos editados','Até 14 stories editados'], ideal:'Making of, cerimônia e recepção. Entrega em 3 dias úteis.' },
+    'st-eventos-video': { sub:'Vídeo pelo celular', res:['1 vídeo editado','Melhores momentos','Até 5 horas'], ideal:'Ideal para eventos em geral.' },
+    'st-eventos-story': { sub:'Seu evento ao vivo no Instagram', res:['Até 7 stories','Em tempo real','Horário a combinar'], ideal:'Ideal para eventos em geral.' },
+    'st-eventos-combo': { sub:'Vídeo + stories', res:['1 vídeo melhores momentos','Stories em tempo real','Horário a combinar'], ideal:'Ideal para eventos em geral.' },
+    'st-infantil-video': { sub:'Vídeo pelo celular', res:['1 vídeo editado','Melhores momentos'], ideal:'Ideal para festas infantis.' },
+    'st-infantil-story': { sub:'A festa nos stories', res:['Até 6 stories do evento'], ideal:'Ideal para festas infantis.' },
+    'st-infantil-kids': { sub:'Vídeo + stories', res:['1 vídeo melhores momentos','Stories em tempo real'], ideal:'Ideal para festas infantis.' }
   };
 
   function cardPacote(k){
     var p = P[k], e = EXTRA[k];
-    var foto = p.cat === 'fotos';
+    var foto = p.cat === 'fotos', story = p.cat === 'stories';
     var nome = p.nome.replace('Pacote ', '');
     var lis = '';
     for (var i = 0; i < e.res.length; i++) { lis += '<li>' + e.res[i] + '</li>'; }
-    return '<div class="pk"><div class="pk-top"><div class="row"><span>Coleção de ' + (foto ? 'foto' : 'vídeo') + '</span>'
-      + '<i class="fa-solid ' + (foto ? 'fa-camera' : 'fa-video') + '"></i></div>'
+    var rotulo = story ? 'StoryMaker &#8226; ' + tituloGrupo(p.grupo) : 'Coleção de ' + (foto ? 'foto' : 'vídeo');
+    var icone = story ? 'fa-mobile-screen-button' : (foto ? 'fa-camera' : 'fa-video');
+    return '<div class="pk"><div class="pk-top"><div class="row"><span>' + rotulo + '</span>'
+      + '<i class="fa-solid ' + icone + '"></i></div>'
       + '<h3><a data-pkg="' + k + '" href="javascript:void(0)">' + nome + '</a></h3><small>' + e.sub + '</small></div>'
       + '<div class="pk-body"><div class="pk-inv">Investimento</div><div class="pk-price">' + p.preco + '</div>'
       + '<ul>' + lis + '</ul><p class="pk-ideal">' + e.ideal + '</p>'
@@ -203,14 +297,29 @@
   var paineis = document.querySelectorAll('.pkg-panel');
   var pFotos = document.querySelector('.pkg-panel[data-panel="fotos"]');
   var pVideos = document.querySelector('.pkg-panel[data-panel="videos"]');
+  var pStories = document.querySelector('.pkg-panel[data-panel="stories"]');
   if (pFotos && pVideos) {
     var hf = '', hv = '';
     for (var kk in P) {
       if (!P.hasOwnProperty(kk)) { continue; }
-      if (P[kk].cat === 'fotos') { hf += cardPacote(kk); } else { hv += cardPacote(kk); }
+      if (P[kk].cat === 'fotos') { hf += cardPacote(kk); }
+      else if (P[kk].cat === 'vídeos') { hv += cardPacote(kk); }
     }
     pFotos.innerHTML = hf;
     pVideos.innerHTML = hv;
+  }
+  if (pStories) {
+    var hs = '';
+    for (var g = 0; g < GRUPOS.length; g++) {
+      var cards = '';
+      for (var ks in P) {
+        if (P.hasOwnProperty(ks) && P[ks].cat === 'stories' && P[ks].grupo === GRUPOS[g].id) { cards += cardPacote(ks); }
+      }
+      hs += '<div class="pkg-group"><div class="pkg-group-head"><h3>' + GRUPOS[g].titulo + '</h3>'
+        + '<span>Orçamento válido por 7 dias</span></div>'
+        + '<div class="pkg-group-grid">' + cards + '</div></div>';
+    }
+    pStories.innerHTML = hs;
   }
 
   /* ---- Abas Fotos / Vídeos ---- */
@@ -254,9 +363,13 @@
     pararYT();
     var lis = '';
     for (var i = 0; i < p.itens.length; i++) { lis += '<li>' + p.itens[i] + '</li>'; }
-    var nota = (p.cat === 'vídeos') ? NOTA_VIDEOS : NOTA_FOTOS;
-    msgAtual = 'Olá! Gostaria de agendar o ' + p.nome + ' de ' + p.cat + '.';
-    corpo.innerHTML = '<h3>' + p.nome + '</h3><span class="pkg-price">' + p.preco + '</span>'
+    var story = p.cat === 'stories';
+    var nota = story ? NOTA_STORIES : (p.cat === 'vídeos') ? NOTA_VIDEOS : NOTA_FOTOS;
+    msgAtual = story
+      ? 'Olá! Gostaria de agendar o StoryMaker: ' + p.nome + ' (' + tituloGrupo(p.grupo) + ').'
+      : 'Olá! Gostaria de agendar o ' + p.nome + ' de ' + p.cat + '.';
+    corpo.innerHTML = (story ? '<p class="pkg-sub">StoryMaker &#8226; ' + tituloGrupo(p.grupo) + '</p>' : '')
+      + '<h3>' + p.nome + '</h3><span class="pkg-price">' + p.preco + '</span>'
       + montarVideo(k)
       + '<ul>' + lis + '</ul><div class="pkg-note">' + nota + '</div>'
       + '<a class="pkg-cta" target="_blank" rel="noopener" href="' + IG_CHAT + '">Pedir este pacote</a>'
@@ -307,7 +420,7 @@
     for (var k in P) {
       if (!P.hasOwnProperty(k)) { continue; }
       var p = P[k], e = EXTRA[k];
-      var texto = norm([p.nome, p.cat, p.preco, e.sub, e.ideal, e.res.join(' '), p.itens.join(' ')].join(' '));
+      var texto = norm([p.nome, p.cat, p.cat === 'stories' ? 'storymaker storymakers ' + tituloGrupo(p.grupo) : '', p.preco, e.sub, e.ideal, e.res.join(' '), p.itens.join(' ')].join(' '));
       var ok = true;
       for (var j = 0; j < termos.length; j++) {
         if (texto.indexOf(termos[j]) === -1) { ok = false; break; }

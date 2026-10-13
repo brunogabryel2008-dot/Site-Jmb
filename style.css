@@ -100,6 +100,12 @@ h1,h2,h3,h4,.serif{
 .pkg-panel{ display:grid; gap:16px; }
 .pkg-panel[data-panel='fotos']{ grid-template-columns:repeat(3,1fr); }
 .pkg-panel[data-panel='videos']{ grid-template-columns:repeat(4,1fr); }
+.pkg-panel[data-panel='stories']{ grid-template-columns:1fr; gap:40px; }
+.pkg-group-head{ display:flex; justify-content:space-between; align-items:baseline; gap:16px; flex-wrap:wrap; border-bottom:1px solid #d6d6d6; padding-bottom:10px; margin-bottom:16px; }
+.pkg-group-head h3{ font-size:26px; }
+.pkg-group-head span{ font-size:9.5px; letter-spacing:1px; text-transform:uppercase; color:var(--gray); }
+.pkg-group-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+.pkg-sub{ font-size:10px; letter-spacing:1px; text-transform:uppercase; color:var(--gray); margin:0 0 2px; }
 .pkg-results{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
 .pkg-panel.pkg-hide, .pkg-results.pkg-hide, .pkg-empty.pkg-hide{ display:none !important; }
 .pkg-empty{ font-size:13px; color:#555; margin:0 0 18px; }
@@ -192,7 +198,7 @@ iframe.skiptranslate, .goog-te-banner-frame{ display:none !important; }
 /* ---- Responsivo ---- */
 @media (max-width:1000px){
   .pkg-panel[data-panel='videos']{ grid-template-columns:repeat(2,1fr); }
-  .pkg-panel[data-panel='fotos'], .pkg-results{ grid-template-columns:repeat(2,1fr); }
+  .pkg-panel[data-panel='fotos'], .pkg-results, .pkg-group-grid{ grid-template-columns:repeat(2,1fr); }
 }
 @media (max-width:760px){
   .menu a:not(.btn-line){ display:none; }
@@ -206,7 +212,10 @@ iframe.skiptranslate, .goog-te-banner-frame{ display:none !important; }
   .pac-tools{ flex-direction:column; align-items:stretch; }
 }
 @media (max-width:560px){
-  .pkg-panel[data-panel='videos'], .pkg-panel[data-panel='fotos'], .pkg-results{ grid-template-columns:1fr; }
+  .pkg-panel[data-panel='videos'], .pkg-panel[data-panel='fotos'], .pkg-results, .pkg-group-grid{ grid-template-columns:1fr; }
+  .pkg-tabs{ gap:2px; }
+  .pkg-tab{ flex:1; padding:9px 8px; font-size:10.5px; }
+  .pkg-tab i{ margin-right:4px; }
   .port-side{ grid-template-columns:1fr; }
   .feat{ grid-template-columns:1fr; }
 }
