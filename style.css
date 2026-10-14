@@ -227,6 +227,17 @@ button.read-more:hover{ background:var(--white); color:var(--black); }
 .pkg-video iframe{ position:absolute; top:0; left:0; width:100%; height:100%; border:0; }
 .pkg-video.vertical{ aspect-ratio:9/16; max-height:60vh; width:auto; margin-left:auto; margin-right:auto; }
 
+/* ---- Botão flutuante do WhatsApp ---- */
+.wa-float{ position:fixed; right:24px; bottom:24px; z-index:60; display:flex; align-items:center; gap:0; height:60px; min-width:60px; padding:0 19px; background:var(--black); color:var(--white); text-decoration:none; border:1px solid rgba(255,255,255,.18); border-radius:40px; box-shadow:0 10px 30px rgba(0,0,0,.28); transition:gap .35s ease, transform .3s ease, background-color .3s ease; }
+.wa-float i{ font-size:24px; line-height:1; }
+.wa-float span{ max-width:0; overflow:hidden; white-space:nowrap; font-size:11.5px; font-weight:500; letter-spacing:1.8px; text-transform:uppercase; transition:max-width .4s ease; }
+.wa-float:hover{ gap:12px; transform:translateY(-2px); }
+.wa-float:hover span{ max-width:160px; }
+.wa-float:before{ content:''; position:absolute; inset:-1px; border-radius:inherit; border:1px solid var(--black); animation:waPulso 2.6s ease-out infinite; pointer-events:none; }
+@keyframes waPulso{ 0%{ transform:scale(1); opacity:.55; } 80%,100%{ transform:scale(1.35); opacity:0; } }
+@media (max-width:760px){ .wa-float{ right:16px; bottom:16px; height:56px; min-width:56px; padding:0 17px; } }
+@media (prefers-reduced-motion:reduce){ .wa-float:before{ animation:none; } }
+
 /* ---- Tradutor ---- */
 #google_translate_element{ position:absolute; left:-9999px; top:0; width:1px; height:1px; overflow:hidden; }
 iframe.skiptranslate, .goog-te-banner-frame{ display:none !important; }
