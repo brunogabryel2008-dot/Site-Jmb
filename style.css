@@ -183,6 +183,8 @@ button.read-more:hover{ background:#2b2b2b; }
 .pkg-note{ background:var(--paper); padding:12px 14px; font-size:12px; line-height:1.55; color:#333; margin-bottom:18px; }
 .pkg-note b{ display:block; margin-bottom:4px; }
 .pkg-cta{ display:block; text-align:center; background:var(--black); color:var(--white) !important; text-decoration:none !important; padding:13px; font-weight:500; font-size:13px; }
+.pkg-cta i{ margin-right:6px; }
+.pkg-ig{ display:block; text-align:center; margin-top:12px; font-size:12px; color:var(--black); text-decoration:underline; }
 .pkg-hint{ margin:10px 0 0; text-align:center; font-size:12px; line-height:1.5; color:#666; }
 .pkg-hint b{ color:var(--black); }
 .pkg-video{ position:relative; width:100%; aspect-ratio:16/9; margin:0 0 18px; overflow:hidden; background:#000; }

@@ -1,5 +1,8 @@
 (function(){
   var IG_CHAT = 'https://ig.me/m/_.jmb.r';
+  /* WhatsApp: número com DDI + DDD, só dígitos */
+  var WHATS = '5561998328852';
+  function linkWhats(msg){ return 'https://wa.me/' + WHATS + '?text=' + encodeURIComponent(msg); }
 
   /* =====================================================
      VÍDEOS DOS PACOTES
@@ -378,8 +381,10 @@
       + '<h3>' + p.nome + '</h3><span class="pkg-price">' + p.preco + '</span>'
       + montarVideo(k)
       + '<ul>' + lis + '</ul><div class="pkg-note">' + nota + '</div>'
-      + '<a class="pkg-cta" target="_blank" rel="noopener" href="' + IG_CHAT + '">Pedir este pacote</a>'
-      + '<p class="pkg-hint" id="pkg-hint">Ao clicar, a mensagem é copiada e o chat do Instagram abre. É só colar e enviar.</p>';
+      + '<a class="pkg-cta" target="_blank" rel="noopener" href="' + linkWhats(msgAtual) + '">'
+      + '<i class="fa-brands fa-whatsapp"></i> Pedir pelo WhatsApp</a>'
+      + '<p class="pkg-hint" id="pkg-hint">A mensagem já vai escrita com o nome do pacote. É só enviar.</p>'
+      + '<a class="pkg-ig" target="_blank" rel="noopener" href="' + IG_CHAT + '">Prefere o Instagram? Fale por lá</a>';
     modal.className = 'pkg-modal open';
     modal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
@@ -458,8 +463,9 @@
     var t = e.target;
     if (!t || !t.closest) { return; }
 
-    var cta = t.closest('.pkg-cta');
-    if (cta) {
+    if (t.closest('.pkg-cta')) { return; }
+    var ig = t.closest('.pkg-ig');
+    if (ig) {
       copiar(msgAtual);
       var hint = document.getElementById('pkg-hint');
       if (hint) { hint.innerHTML = '<b>✓ Mensagem copiada!</b> Cole no chat do Instagram e envie.'; }
