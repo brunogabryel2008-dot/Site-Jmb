@@ -261,7 +261,7 @@
   /* Textos curtos que aparecem nos cartões */
   var EXTRA = {
     'foto-mini': { sub:'Para registrar o essencial', res:['10 fotos editadas','2 looks à escolha','Galeria online privada','Entrega em até 48h'], ideal:'Ideal para ensaios rápidos e registros do dia a dia.' },
-    'foto-essencial': { sub:'Fotos e um toque de movimento', res:['15 fotos tratadas','StoryMaker de 50 seg','3 looks à escolha','Entrega em até 72h'], ideal:'Ideal para ensaios completos e conteúdo para redes.' },
+    'foto-essencial': { sub:'Fotos e um toque de movimento', res:['15 fotos tratadas','Filmaker de 50 seg','3 looks à escolha','Entrega em até 72h'], ideal:'Ideal para ensaios completos e conteúdo para redes.' },
     'foto-completo': { sub:'Fotos e vídeos com drone', res:['Fotos à escolha do cliente','Câmeras profissionais','Drone profissional','Entrega em até 72h'], ideal:'Ideal para quem quer foto e vídeo juntos.' },
     'vid-simples': { sub:'O essencial do seu momento', res:['4 horas de cobertura','2 videomakers','Vídeo de 3 a 5 min','Até 10 dias úteis'], ideal:'Ideal para aniversário pequeno, festa simples e casamento civil.' },
     'vid-padrao': { sub:'Uma festa com mais detalhes', res:['6 horas + drone','2 videomakers','Making of + filme de 6 a 10 min','15 dias úteis'], ideal:'Ideal para 15 anos, bodas e casamento.' },
