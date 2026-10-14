@@ -159,7 +159,7 @@
       'Prazo de entrega de todos os materiais: até 48h' ] },
     'foto-essencial': { cat:'fotos', nome:'Pacote Essencial', preco:'R$250,00', itens:[
       '15 fotos tratadas (à escolha do cliente)',
-      'Filmaker de 50seg',
+      'Filmaker de 50 seg',
       '3 looks à escolha do cliente',
       'Entrega em galeria online privada (AirDrop ou arquivo)',
       'Prazo de entrega de todos os materiais: até 72h' ] },
