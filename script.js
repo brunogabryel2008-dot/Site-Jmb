@@ -1,5 +1,4 @@
 (function(){
-  var IG_CHAT = 'https://ig.me/m/_.jmb.r';
   /* WhatsApp: número com DDI + DDD, só dígitos */
   var WHATS = '5561998328852';
   function linkWhats(msg){ return 'https://wa.me/' + WHATS + '?text=' + encodeURIComponent(msg); }
@@ -382,9 +381,8 @@
       + montarVideo(k)
       + '<ul>' + lis + '</ul><div class="pkg-note">' + nota + '</div>'
       + '<a class="pkg-cta" target="_blank" rel="noopener" href="' + linkWhats(msgAtual) + '">'
-      + '<i class="fa-brands fa-whatsapp"></i> Pedir pelo WhatsApp</a>'
-      + '<p class="pkg-hint" id="pkg-hint">A mensagem já vai escrita com o nome do pacote. É só enviar.</p>'
-      + '<a class="pkg-ig" target="_blank" rel="noopener" href="' + IG_CHAT + '">Prefere o Instagram? Fale por lá</a>';
+      + '<i class="fa-brands fa-whatsapp"></i> Pedir este pacote</a>'
+      + '<p class="pkg-hint" id="pkg-hint">Abre o WhatsApp com a mensagem já escrita. É só enviar.</p>';
     modal.className = 'pkg-modal open';
     modal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
@@ -464,13 +462,6 @@
     if (!t || !t.closest) { return; }
 
     if (t.closest('.pkg-cta')) { return; }
-    var ig = t.closest('.pkg-ig');
-    if (ig) {
-      copiar(msgAtual);
-      var hint = document.getElementById('pkg-hint');
-      if (hint) { hint.innerHTML = '<b>✓ Mensagem copiada!</b> Cole no chat do Instagram e envie.'; }
-      return;
-    }
 
     var aba = t.closest('[data-tab]');
     if (aba) { trocarAba(aba.getAttribute('data-tab')); return; }
