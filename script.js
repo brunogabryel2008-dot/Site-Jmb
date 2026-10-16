@@ -297,6 +297,13 @@
     'st-infantil-kids': { sub:'Vídeo + stories', res:['1 vídeo melhores momentos','Stories em tempo real'], ideal:'Ideal para festas infantis.' }
   };
 
+  /* =====================================================
+     PACOTES MAIS ESCOLHIDOS
+     Coloque aqui o código dos pacotes que levam o selo "Mais escolhido".
+     ===================================================== */
+  var DESTAQUES = ['foto-essencial', 'vid-padrao'];
+  var SELO = 'Mais escolhido';
+
   function cardPacote(k){
     var p = P[k], e = EXTRA[k];
     var foto = p.cat === 'fotos', story = p.cat === 'stories';
@@ -306,7 +313,10 @@
     lis += '<li>' + AVISO_DIAS + '</li>';
     var rotulo = story ? 'StoryMaker &#8226; ' + tituloGrupo(p.grupo) : 'Coleção de ' + (foto ? 'foto' : 'vídeo');
     var icone = story ? 'fa-mobile-screen-button' : (foto ? 'fa-camera' : 'fa-video');
-    return '<div class="pk"><div class="pk-top"><div class="row"><span>' + rotulo + '</span>'
+    var destaque = DESTAQUES.indexOf(k) !== -1;
+    return '<div class="pk' + (destaque ? ' pk-destaque' : '') + '">'
+      + (destaque ? '<span class="pk-badge"><i class="fa-solid fa-star"></i>' + SELO + '</span>' : '')
+      + '<div class="pk-top"><div class="row"><span>' + rotulo + '</span>'
       + '<i class="fa-solid ' + icone + '"></i></div>'
       + '<h3><a data-pkg="' + k + '" href="javascript:void(0)">' + nome + '</a></h3><small>' + e.sub + '</small></div>'
       + '<div class="pk-body"><div class="pk-inv">Investimento</div><div class="pk-price">' + p.preco + '</div>'
