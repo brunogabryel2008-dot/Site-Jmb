@@ -13,9 +13,9 @@
     'foto-essencial': 'https://www.youtube.com/embed/qbkj1ZG38Js',
     'foto-completo': 'https://www.youtube.com/embed/XHiwF2DHyRk',
     'vid-simples': 'https://www.youtube.com/embed/PHlJLSCs6PA',
-    'vid-padrao': 'https://www.youtube.com/embed/fasuw7Wn3fU'
-    /* 'vid-essencial': '',
-       'vid-duplo': '', */
+    'vid-padrao': 'https://www.youtube.com/embed/fasuw7Wn3fU',
+    'vid-essencial': 'https://www.youtube.com/embed/kk_zBGqnRMc'
+    /* 'vid-duplo': '', */
   };
 
   /* =====================================================
