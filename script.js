@@ -455,7 +455,7 @@
     for (var k in P) {
       if (!P.hasOwnProperty(k)) { continue; }
       var p = P[k], e = EXTRA[k];
-      var texto = norm([p.nome, p.cat, p.cat === 'stories' ? 'storymaker storymakers ' + tituloGrupo(p.grupo) : '', p.preco, e.sub, e.ideal, e.res.join(' '), p.itens.join(' ')].join(' '));
+      var texto = norm([p.nome, p.cat, p.cat === 'stories' ? 'storymaker storymakers ' + tituloGrupo(p.grupo) : '', DESTAQUES.indexOf(k) !== -1 ? SELO + ' mais escolhidos escolhido destaque destaques popular populares favorito favoritos mais vendido mais vendidos' : '', p.preco, e.sub, e.ideal, e.res.join(' '), p.itens.join(' ')].join(' '));
       var ok = true;
       for (var j = 0; j < termos.length; j++) {
         if (texto.indexOf(termos[j]) === -1) { ok = false; break; }
