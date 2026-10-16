@@ -18,6 +18,21 @@
        'vid-duplo': '', */
   };
 
+  /* =====================================================
+     FOTOS DOS PACOTES
+     Nome do arquivo da foto (na mesma pasta do site).
+     A foto aparece na janela "Saiba mais", logo abaixo do preço.
+     ===================================================== */
+  var FOTOS = {
+    'foto-mini': 'heitor.jpeg'
+  };
+
+  function montarFoto(k){
+    var f = FOTOS[k];
+    if (!f) { return ''; }
+    return '<div class="pkg-foto"><img src="' + f + '" alt="Exemplo do pacote" loading="lazy"></div>';
+  }
+
   /* ---- Player do YouTube: sem controles + volume mínimo 50% ---- */
   var VOLUME_MINIMO = 50;
   var ytAtual = null;
@@ -378,6 +393,7 @@
       : 'Olá! Gostaria de agendar o ' + p.nome + ' de ' + p.cat + '.';
     corpo.innerHTML = (story ? '<p class="pkg-sub">StoryMaker &#8226; ' + tituloGrupo(p.grupo) + '</p>' : '')
       + '<h3>' + p.nome + '</h3><span class="pkg-price">' + p.preco + '</span>'
+      + montarFoto(k)
       + montarVideo(k)
       + '<ul>' + lis + '</ul><div class="pkg-note">' + nota + '</div>'
       + '<a class="pkg-cta" target="_blank" rel="noopener" href="' + linkWhats(msgAtual) + '">'

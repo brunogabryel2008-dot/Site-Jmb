@@ -6,7 +6,7 @@
 .img.img-hero{ background-image:url('hero.jpg'); background-position:center 40%; }       /* foto grande do topo */
 .img.img-sobre{ background-image:url('sobre.jpg'); background-position:center 35%; filter:none; }      /* foto da seção "Não é só sobre registrar" (colorida) */
 .img-port1{ background-image:url('portfolio-1.jpg'); background-position:center 35%; }      /* portfólio: foto grande */
-.img.img-port2{ background-image:url('heitor.jpeg'); background-position:center 30%; filter:none; }      /* portfólio: pequena de cima (colorida) */
+.img.img-port2{ background-image:url('Dagma.jpeg'); background-position:center 60%; filter:none; }      /* portfólio: pequena de cima (colorida) */
 .img-port3{ background-image:url('portfolio-3.jpg'); background-position:center 25%; }      /* portfólio: pequena de baixo */
 
 /* =====================================================
@@ -225,6 +225,8 @@ button.read-more:hover{ background:var(--white); color:var(--black); }
 .pkg-hint b{ color:var(--black); }
 .pkg-video{ position:relative; width:100%; aspect-ratio:16/9; margin:0 0 24px; overflow:hidden; background:#000; }
 .pkg-video iframe{ position:absolute; top:0; left:0; width:100%; height:100%; border:0; }
+.pkg-foto{ margin:0 0 24px; background:#000; overflow:hidden; }
+.pkg-foto img{ display:block; width:100%; height:auto; max-height:62vh; object-fit:cover; object-position:center 35%; }
 .pkg-video.vertical{ aspect-ratio:9/16; max-height:60vh; width:auto; margin-left:auto; margin-right:auto; }
 
 /* ---- Botão flutuante do WhatsApp ---- */
