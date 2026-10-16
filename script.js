@@ -12,7 +12,7 @@
   var VIDEOS = {
     'foto-essencial': 'https://www.youtube.com/embed/qbkj1ZG38Js',
     'foto-completo': 'https://www.youtube.com/embed/XHiwF2DHyRk',
-    'vid-simples': 'COLE_AQUI_O_LINK_DO_VIDEO',
+    'vid-simples': 'https://www.youtube.com/embed/PHlJLSCs6PA',
     'vid-padrao': 'https://www.youtube.com/embed/fasuw7Wn3fU'
     /* 'vid-essencial': '',
        'vid-duplo': '', */
