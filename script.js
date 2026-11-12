@@ -701,7 +701,7 @@
   }
 
   /* ---------- Trilha de Natal (gerada no navegador, sem arquivo de áudio) ---------- */
-  var VOLUME = 0.04;   /* bem baixinho. Aumente aqui se quiser (ex.: 0.07) */
+  var VOLUME = 0.07;   /* baixinho, mas audível no celular. Ajuste aqui se quiser (0.04 = bem baixo, 0.10 = mais alto) */
   var NOTAS = { C:261.63, D:293.66, E:329.63, F:349.23, G:392.00, A:440.00, B:493.88, C5:523.25, D5:587.33, E5:659.25, F5:698.46 };
   var NOITE = [   /* Noite Feliz (tempo em colcheias) */
     ['G',3],['A',1],['G',2],['E',6], ['G',3],['A',1],['G',2],['E',6],
@@ -820,6 +820,29 @@
     setInterval(function(){ if (ctx.state === 'running' && ctx.currentTime > fim - 2) { agenda(); } }, 800);
     atualiza();
   }
+  /* Celular: o iPhone deixa o Web Audio mudo com o botão lateral no silencioso e só libera o som
+     depois de um toque. Um áudio mudo em loop (tocado no primeiro toque) troca a sessão de áudio para
+     "reprodução" e faz a música sair mesmo assim. */
+  var mudo = null;
+  function criaMudo(){
+    try {
+      var n = 2000, b = new Uint8Array(44 + n), v = new DataView(b.buffer);
+      function t(o, x){ for (var i = 0; i < x.length; i++) { b[o + i] = x.charCodeAt(i); } }
+      t(0, 'RIFF'); v.setUint32(4, 36 + n, true); t(8, 'WAVEfmt '); v.setUint32(16, 16, true);
+      v.setUint16(20, 1, true); v.setUint16(22, 1, true); v.setUint32(24, 8000, true);
+      v.setUint32(28, 8000, true); v.setUint16(32, 1, true); v.setUint16(34, 8, true);
+      t(36, 'data'); v.setUint32(40, n, true);
+      for (var i = 0; i < n; i++) { b[44 + i] = 128; }   /* 128 = silêncio em 8 bits */
+      mudo = new Audio(URL.createObjectURL(new Blob([b], { type:'audio/wav' })));
+      mudo.loop = true; mudo.setAttribute('playsinline', '');
+    } catch (e) { mudo = null; }
+  }
+  function destravaCelular(){
+    try { if (navigator.audioSession) { navigator.audioSession.type = 'playback'; } } catch (e) {}
+    if (!mudo) { criaMudo(); }
+    if (mudo && mudo.paused) { var pm = mudo.play(); if (pm && pm.catch) { pm.catch(function(){}); } }
+  }
+
   function atualiza(){
     if (player) {
       var quer = ligada && !pausaVideo && !document.hidden;
@@ -829,7 +852,12 @@
     }
     if (!ctx) { return; }
     var deve = ligada && !pausaVideo && !document.hidden;
-    if (deve && ctx.state === 'suspended') { ctx.resume(); }
+    if (deve) { destravaCelular(); }
+    else if (mudo && !mudo.paused) { mudo.pause(); }
+    /* 'interrupted' é o estado do iPhone depois de bloquear a tela ou receber ligação */
+    if (deve && ctx.state !== 'running' && ctx.state !== 'closed') {
+      var rp = ctx.resume(); if (rp && rp.catch) { rp.catch(function(){}); }
+    }
     if (!deve && ctx.state === 'running') { ctx.suspend(); }
   }
 
@@ -913,6 +941,8 @@
 
   /* Pausa ao trocar de aba e enquanto a janela "Saiba mais" (com vídeo) está aberta */
   document.addEventListener('visibilitychange', atualiza);
+  window.addEventListener('pageshow', atualiza);
+  window.addEventListener('focus', atualiza);
   var modal = document.getElementById('pkg-modal');
   if (modal && window.MutationObserver) {
     new MutationObserver(function(){
