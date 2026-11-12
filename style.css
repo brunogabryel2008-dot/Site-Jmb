@@ -509,3 +509,18 @@ button.read-more:hover i{ transform:translateX(4px); }
 
 @media (max-width:640px){ .pkg-dialog{ padding-top:54px; } }
 
+
+/* =====================================================
+   NATAL — TELA DE ENTRADA (libera o som e inicia a música)
+   ===================================================== */
+#nat-entrada{ position:fixed; inset:0; z-index:10000; display:flex; align-items:center; justify-content:center; padding:24px; cursor:pointer; background:radial-gradient(70% 60% at 50% 35%, rgba(20,61,43,.96), rgba(7,18,13,.99)); transition:opacity .6s ease, visibility .6s ease; }
+#nat-entrada.saindo{ opacity:0; visibility:hidden; pointer-events:none; }
+#nat-entrada .ent-box{ text-align:center; max-width:460px; color:var(--nat-ivory); }
+#nat-entrada .ent-logo{ height:56px; width:auto; margin:0 auto 26px; display:block; }
+#nat-entrada .ent-star svg{ width:16px; height:16px; fill:var(--nat-gold); }
+#nat-entrada h2{ font-size:clamp(40px,9vw,64px); color:var(--nat-ivory); margin:14px 0 14px; }
+#nat-entrada h2 em{ background:linear-gradient(100deg,#ecd9a8 0%,#c9a45c 55%,#ecd9a8 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent; }
+#nat-entrada p{ font-size:15px; line-height:1.7; color:var(--nat-gold-light); margin:0 0 34px; }
+#nat-entrada .ent-btn{ display:inline-flex; align-items:center; gap:12px; background:var(--nat-gold); color:#14110a; border:1px solid var(--nat-gold); padding:18px 30px; font-family:'Poppins',sans-serif; font-size:11.5px; font-weight:500; letter-spacing:1.8px; text-transform:uppercase; cursor:pointer; transition:background-color .3s ease, color .3s ease; }
+#nat-entrada .ent-btn:hover{ background:transparent; color:var(--nat-gold-light); }
+#nat-entrada small{ display:block; margin-top:18px; font-size:11px; letter-spacing:1.6px; text-transform:uppercase; color:#8f8980; }

@@ -869,6 +869,38 @@
     }
   }, 300);
 
+  /* ---------- Tela de entrada: o clique em "Entrar" libera o som e a música começa na hora ---------- */
+  if (ligada) {
+    var logoEl = document.querySelector('.bar .logo img');
+    var tela = document.createElement('div');
+    tela.id = 'nat-entrada';
+    tela.setAttribute('role', 'dialog');
+    tela.setAttribute('aria-label', 'Boas-vindas');
+    tela.innerHTML = '<div class="ent-box">'
+      + (logoEl ? '<img class="ent-logo" alt="JMB" src="' + logoEl.src + '">' : '')
+      + '<div class="ent-star">' + STAR + '</div>'
+      + '<h2>Boas <em>Festas</em></h2>'
+      + '<p>Que a luz desta época ilumine os seus melhores momentos.</p>'
+      + '<button type="button" class="ent-btn"><i class="fa-solid fa-music"></i> Entrar no site</button>'
+      + '<small>Com trilha de Natal</small></div>';
+    document.body.appendChild(tela);
+    document.body.style.overflow = 'hidden';
+    var entrou = false;
+    function entrar(){
+      if (entrou) { return; }
+      entrou = true;
+      ligada = true;
+      if (!iniciada) { inicia(); }
+      atualiza(); visual();
+      tela.className = 'saindo';
+      document.body.style.overflow = '';
+      setTimeout(function(){ if (tela.parentNode) { tela.parentNode.removeChild(tela); } }, 700);
+    }
+    tela.addEventListener('click', entrar);
+    var eb = tela.querySelector('.ent-btn');
+    if (eb && eb.focus) { try { eb.focus({ preventScroll:true }); } catch (e) {} }
+  }
+
   /* Os navegadores (principalmente Safari e Chrome no computador) só liberam o som depois do
      primeiro clique, toque ou tecla. Assim que isso acontece, a música começa na hora. */
   function destrava(e){
@@ -877,7 +909,7 @@
     atualiza(); visual();
     setTimeout(visual, 300);
   }
-  ['pointerdown','mousedown','click','keydown','touchstart','touchend'].forEach(function(ev){ document.addEventListener(ev, destrava, true); });
+  ['pointerdown','pointerup','mousedown','mouseup','click','keydown','touchstart','touchend'].forEach(function(ev){ document.addEventListener(ev, destrava, true); });
 
   /* Pausa ao trocar de aba e enquanto a janela "Saiba mais" (com vídeo) está aberta */
   document.addEventListener('visibilitychange', atualiza);
