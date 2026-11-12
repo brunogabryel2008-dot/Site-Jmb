@@ -3,7 +3,7 @@
 /* =====================================================
    SUAS IMAGENS: coloque os arquivos na pasta img/ com estes nomes
    ===================================================== */
-.img.img-hero{ background-image:url('isadora.jpg'); background-position:center 40%; }       /* foto grande do topo */
+.img.img-hero{ background-image:url('hero.jpg?v=4'); background-position:center 40%; }       /* foto grande do topo */
 .img.img-sobre{ background-image:url('sobre.jpg'); background-position:center 35%; filter:none; }      /* foto da seção "Não é só sobre registrar" (colorida) */
 .img-port1{ background-image:url('portfolio-1.jpg'); background-position:center 35%; }      /* portfólio: foto grande */
 .img.img-port2{ background-image:url('Dagma.jpeg'); background-position:center 60%; filter:none; }      /* portfólio: pequena de cima (colorida) */
@@ -438,3 +438,74 @@ button.read-more:hover i{ transform:translateX(4px); }
   #nat-music{ left:12px; bottom:12px; width:48px; height:48px; }
   #nat-music-dica{ left:68px; bottom:22px; }
 }
+/* =====================================================
+   NATAL — PACOTES (cartões e janela "Saiba mais")
+   ===================================================== */
+:root{
+  --nat-star:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23c9a45c' d='M12 1l1.8 8.2L22 11l-8.2 1.8L12 21l-1.8-8.2L2 11l8.2-1.8z'/%3E%3C/svg%3E");
+}
+
+/* ---- Cartões dos pacotes ---- */
+.pk{ transition:transform .35s ease, border-color .35s ease, box-shadow .35s ease; }
+.pk:hover{ transform:translateY(-4px); border-color:var(--nat-gold); box-shadow:0 14px 34px rgba(20,61,43,.16); }
+.pk-top{ background:linear-gradient(160deg,var(--nat-green) 0%,var(--nat-green-deep) 100%); position:relative; overflow:hidden; }
+.pk-top:after{ content:''; position:absolute; right:18px; top:16px; width:11px; height:11px; background:var(--nat-star) center/contain no-repeat; opacity:.9; }
+.pk-top .row{ color:var(--nat-gold-light); opacity:.85; }
+.pk-top h3 a:hover{ color:var(--nat-gold-light); }
+.pk-top small{ color:#d9d2bd; }
+.pk-price{ border-bottom-color:rgba(201,164,92,.5); }
+.pk li:before{ width:9px; height:9px; top:11px; left:3px; background:var(--nat-star) center/contain no-repeat; }
+.pk-destaque li:before{ background:var(--nat-star) center/contain no-repeat; }
+.pk.pk-destaque{ background:var(--nat-green-deep); border-color:var(--nat-gold); }
+.pk-destaque .pk-top{ border-bottom:1px solid rgba(201,164,92,.35); }
+.pk-badge{ background:var(--nat-gold); color:#14110a; border-color:var(--nat-gold); }
+.pkg-group-head{ border-bottom-color:rgba(201,164,92,.55); }
+.pkg-group-head h3{ color:var(--nat-green); }
+.pkg-tab:hover{ background:rgba(20,61,43,.08); }
+.pkg-tabs{ border-color:var(--nat-green); }
+.pkg-tab{ border-right-color:var(--nat-green); }
+
+/* ---- Janela "Saiba mais" ---- */
+.pkg-backdrop{ background:radial-gradient(70% 60% at 50% 40%, rgba(20,61,43,.72), rgba(7,18,13,.9)); }
+.pkg-dialog{
+  background:var(--nat-ivory);
+  border:1px solid var(--nat-gold);
+  border-top:3px solid var(--nat-gold);
+  box-shadow:0 0 0 5px rgba(11,31,22,.55), 0 28px 70px rgba(0,0,0,.55);
+  padding-top:58px;
+}
+/* fio de luzinhas no topo da janela */
+.pkg-dialog:before{
+  content:''; position:absolute; left:0; right:0; top:0; height:26px; pointer-events:none;
+  background:
+    radial-gradient(circle at 50% 50%, #f6e3b0 0 2px, rgba(246,227,176,.35) 3px, transparent 5px) 0 11px/30px 20px repeat-x,
+    linear-gradient(var(--nat-gold),var(--nat-gold)) 0 8px/100% 1px no-repeat;
+  animation:natBrilho 3.2s ease-in-out infinite;
+}
+/* faixa verde com estrela, atrás do título */
+.pkg-dialog:after{
+  content:''; position:absolute; left:0; right:0; top:26px; height:0; pointer-events:none;
+}
+.pkg-dialog h3{ color:var(--nat-green); position:relative; padding-left:0; }
+.pkg-dialog h3:before{
+  content:''; display:block; width:16px; height:16px; margin:0 0 12px;
+  background:var(--nat-star) center/contain no-repeat;
+}
+.pkg-price{ color:var(--nat-green); border-bottom:1px solid var(--nat-gold); }
+.pkg-close{ color:var(--nat-green); z-index:3; top:14px; transition:color .25s ease, transform .25s ease; }
+.pkg-close:hover{ color:var(--nat-gold); transform:rotate(90deg); }
+.pkg-video, .pkg-foto{ border:1px solid var(--nat-gold); box-shadow:0 0 0 4px var(--nat-ivory), 0 0 0 5px rgba(201,164,92,.55); margin-left:5px; margin-right:5px; width:calc(100% - 10px); }
+.pkg-video.vertical{ width:auto; }
+.pkg-dialog li{ border-bottom-color:rgba(201,164,92,.35); }
+.pkg-dialog li:before{ width:10px; height:10px; top:17px; left:1px; background:var(--nat-star) center/contain no-repeat; }
+.pkg-note{ background:rgba(20,61,43,.07); border-left:3px solid var(--nat-gold); }
+.pkg-note b{ color:var(--nat-green); }
+.pkg-cta{ background:var(--nat-green); border:1px solid var(--nat-gold); color:var(--nat-ivory) !important; }
+.pkg-cta:hover{ background:var(--nat-gold); border-color:var(--nat-gold); color:#14110a !important; }
+.pkg-hint b{ color:var(--nat-green); }
+.pkg-dialog::-webkit-scrollbar{ width:8px; }
+.pkg-dialog::-webkit-scrollbar-thumb{ background:rgba(201,164,92,.7); }
+.pkg-dialog::-webkit-scrollbar-track{ background:rgba(20,61,43,.08); }
+
+@media (max-width:640px){ .pkg-dialog{ padding-top:54px; } }
+@media (prefers-reduced-motion:reduce){ .pkg-dialog:before, .pk, .pkg-close{ animation:none; transition:none; } }
