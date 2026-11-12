@@ -24,6 +24,24 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&amp;family=Poppins:wght@300;400;500;600&amp;display=swap">
 <link rel="stylesheet" href="style.css?v=6">
+<!-- Sempre abre (ou recarrega) no topo, mostrando a mensagem inicial -->
+<script>
+(function(){
+  try { if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; } } catch (e) {}
+  function topo(){
+    var de = document.documentElement, antes = de.style.scrollBehavior;
+    de.style.scrollBehavior = 'auto';           /* sobe na hora, sem animação */
+    window.scrollTo(0, 0);
+    de.style.scrollBehavior = antes;
+  }
+  try { if (location.hash) { history.replaceState(null, '', location.pathname + location.search); } } catch (e) {}
+  topo();
+  window.addEventListener('DOMContentLoaded', topo);
+  window.addEventListener('load', function(){ topo(); setTimeout(topo, 150); });
+  window.addEventListener('pageshow', function(ev){ if (ev.persisted) { topo(); } });
+})();
+</script>
+
 <script src="script.js?v=6" defer></script>
 </head>
 <body class="index home">
