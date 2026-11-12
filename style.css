@@ -3,7 +3,7 @@
 /* =====================================================
    SUAS IMAGENS: coloque os arquivos na pasta img/ com estes nomes
    ===================================================== */
-.img.img-hero{ background-image:url('isadora.jpg'); background-position:center 40%; }       /* foto grande do topo */
+.img.img-hero{ background-image:url('hero.jpg?v=4'); background-position:center 40%; }       /* foto grande do topo */
 .img.img-sobre{ background-image:url('sobre.jpg'); background-position:center 35%; filter:none; }      /* foto da seção "Não é só sobre registrar" (colorida) */
 .img-port1{ background-image:url('portfolio-1.jpg'); background-position:center 35%; }      /* portfólio: foto grande */
 .img.img-port2{ background-image:url('Dagma.jpeg'); background-position:center 60%; filter:none; }      /* portfólio: pequena de cima (colorida) */
@@ -431,7 +431,7 @@ button.read-more:hover i{ transform:translateX(4px); }
 #nat-music-dica{ position:fixed; left:78px; bottom:26px; z-index:60; background:var(--nat-ivory); color:#1c1b19; border:1px solid var(--nat-gold); font-size:11.5px; letter-spacing:.4px; padding:8px 12px; box-shadow:0 6px 20px rgba(0,0,0,.2); opacity:0; transition:opacity .4s ease; pointer-events:none; }
 #nat-music-dica.on{ opacity:1; }
 
-@media (prefers-reduced-motion:reduce){ .nat-lights i, #nat-music.convite{ animation:none; } }
+
 @media (max-width:760px){
   .nat-banner{ font-size:9.5px; letter-spacing:1.4px; padding:9px 12px; }
   .nat-banner svg:last-child{ display:none; }
@@ -508,4 +508,4 @@ button.read-more:hover i{ transform:translateX(4px); }
 .pkg-dialog::-webkit-scrollbar-track{ background:rgba(20,61,43,.08); }
 
 @media (max-width:640px){ .pkg-dialog{ padding-top:54px; } }
-@media (prefers-reduced-motion:reduce){ .pkg-dialog:before, .pk, .pkg-close{ animation:none; transition:none; } }
+

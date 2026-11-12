@@ -578,7 +578,11 @@
    TEMA NATALINO — luzes, bokeh, neve fina e trilha
    ===================================================== */
 (function(){
-  var reduz = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* Neve e luzes são bem suaves. Muitos Macs/PCs têm "Reduzir movimento" ligado no sistema,
+     o que desligava tudo no computador. Por isso aqui ele é ignorado.
+     Troque para true se quiser respeitar essa opção do sistema. */
+  var RESPEITAR_MOVIMENTO_REDUZIDO = false;
+  var reduz = RESPEITAR_MOVIMENTO_REDUZIDO && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var STAR = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1l1.8 8.2L22 11l-8.2 1.8L12 21l-1.8-8.2L2 11l8.2-1.8z"/></svg>';
 
   /* ---------- Ornamentos entre as seções ---------- */
@@ -624,7 +628,7 @@
     }
     medeHero();
     window.addEventListener('resize', medeHero);
-    var qtd = bw < 760 ? 12 : 22;
+    var qtd = bw < 760 ? 12 : Math.min(40, Math.round(bw / 45));
     for (var k = 0; k < qtd; k++) {
       luzes.push({
         x: Math.random() * bw, y: Math.random() * bh,
@@ -679,7 +683,7 @@
     }
     ajusta();
     window.addEventListener('resize', ajusta);
-    var total = W < 760 ? 24 : 46;
+    var total = W < 760 ? 24 : Math.min(120, Math.round(W / 16));
     for (var q = 0; q < total; q++) {
       flocos.push({ x: Math.random() * W, y: Math.random() * H, r: Math.random() * 1.3 + .5, v: Math.random() * .5 + .2, o: Math.random() * Math.PI * 2, a: .35 + Math.random() * .45 });
     }
@@ -792,6 +796,8 @@
       var p = player.play(); if (p && p.catch) { p.catch(function(){}); }
     });
     player.addEventListener('playing', function(){ erros = 0; });
+    player.addEventListener('play', function(){ visual(); });
+    player.addEventListener('pause', function(){ visual(); });
     iniciada = true;
     atualiza();
   }
@@ -809,6 +815,7 @@
     master.connect(filtro); filtro.connect(seco); seco.connect(ctx.destination);
     filtro.connect(rev); rev.connect(umido); umido.connect(ctx.destination);
     iniciada = true;
+    ctx.onstatechange = function(){ visual(); if (rodando()) { dica.classList.remove('on'); } };
     agenda();
     setInterval(function(){ if (ctx.state === 'running' && ctx.currentTime > fim - 2) { agenda(); } }, 800);
     atualiza();
@@ -830,9 +837,11 @@
   btn.id = 'nat-music'; btn.type = 'button';
   var dica = document.createElement('div');
   dica.id = 'nat-music-dica'; dica.textContent = 'Toque para ouvir a trilha de Natal';
+  function rodando(){ return player ? !player.paused : !!(ctx && ctx.state === 'running'); }
+  function esperando(){ return ligada && iniciada && !pausaVideo && !document.hidden && !rodando(); }   /* navegador ainda não liberou o som */
   function visual(){
     var tocando = iniciada && ligada;
-    btn.className = (tocando ? '' : 'off') + (!iniciada && ligada ? ' convite' : '');
+    btn.className = (tocando ? '' : 'off') + ((!iniciada && ligada) || esperando() ? ' convite' : '');
     btn.innerHTML = '<i class="fa-solid ' + (tocando ? 'fa-music' : 'fa-volume-xmark') + '"></i>';
     btn.setAttribute('aria-label', tocando ? 'Desligar trilha de Natal' : 'Ligar trilha de Natal');
     btn.title = btn.getAttribute('aria-label');
@@ -847,18 +856,22 @@
   document.body.appendChild(btn);
   document.body.appendChild(dica);
   visual();
+  /* Tenta tocar assim que o site abre. */
+  if (ligada) { inicia(); visual(); }
   if (ligada) {
-    setTimeout(function(){ if (!iniciada) { dica.classList.add('on'); } }, 1500);
-    setTimeout(function(){ dica.classList.remove('on'); }, 8000);
+    setTimeout(function(){ if (!iniciada || esperando()) { dica.classList.add('on'); } }, 1200);
+    setTimeout(function(){ dica.classList.remove('on'); }, 9000);
   }
 
-  /* Navegadores só liberam som depois de um toque/clique: começa no primeiro */
-  function primeiroToque(e){
-    if (e.target && e.target.closest && e.target.closest('#nat-music')) { return; }
-    if (ligada && !iniciada) { inicia(); visual(); dica.classList.remove('on'); }
-    ['pointerdown','keydown','touchend'].forEach(function(ev){ document.removeEventListener(ev, primeiroToque); });
+  /* Os navegadores (principalmente Safari e Chrome no computador) só liberam o som depois do
+     primeiro clique, toque ou tecla. Assim que isso acontece, a música começa na hora. */
+  function destrava(e){
+    if (e && e.target && e.target.closest && e.target.closest('#nat-music')) { return; }
+    if (ligada && !iniciada) { inicia(); }
+    atualiza(); visual();
+    setTimeout(function(){ visual(); if (rodando()) { dica.classList.remove('on'); } }, 300);
   }
-  ['pointerdown','keydown','touchend'].forEach(function(ev){ document.addEventListener(ev, primeiroToque); });
+  ['pointerdown','mousedown','click','keydown','touchstart','touchend'].forEach(function(ev){ document.addEventListener(ev, destrava, true); });
 
   /* Pausa ao trocar de aba e enquanto a janela "Saiba mais" (com vídeo) está aberta */
   document.addEventListener('visibilitychange', atualiza);
