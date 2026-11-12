@@ -815,7 +815,7 @@
     master.connect(filtro); filtro.connect(seco); seco.connect(ctx.destination);
     filtro.connect(rev); rev.connect(umido); umido.connect(ctx.destination);
     iniciada = true;
-    ctx.onstatechange = function(){ visual(); if (rodando()) { dica.classList.remove('on'); } };
+    ctx.onstatechange = function(){ visual(); };
     agenda();
     setInterval(function(){ if (ctx.state === 'running' && ctx.currentTime > fim - 2) { agenda(); } }, 800);
     atualiza();
@@ -836,7 +836,7 @@
   var btn = document.createElement('button');
   btn.id = 'nat-music'; btn.type = 'button';
   var dica = document.createElement('div');
-  dica.id = 'nat-music-dica'; dica.textContent = 'Toque para ouvir a trilha de Natal';
+  dica.id = 'nat-music-dica'; dica.textContent = 'Toque para silenciar a música';
   function rodando(){ return player ? !player.paused : !!(ctx && ctx.state === 'running'); }
   function esperando(){ return ligada && iniciada && !pausaVideo && !document.hidden && !rodando(); }   /* navegador ainda não liberou o som */
   function visual(){
@@ -858,10 +858,16 @@
   visual();
   /* Tenta tocar assim que o site abre. */
   if (ligada) { inicia(); visual(); }
-  if (ligada) {
-    setTimeout(function(){ if (!iniciada || esperando()) { dica.classList.add('on'); } }, 1200);
-    setTimeout(function(){ dica.classList.remove('on'); }, 9000);
-  }
+  /* O aviso só aparece quando a música JÁ está tocando, para a pessoa poder silenciar. */
+  var dicaJa = false;
+  var dicaTimer = setInterval(function(){
+    if (!dicaJa && ligada && rodando()) {
+      dicaJa = true;
+      clearInterval(dicaTimer);
+      dica.classList.add('on');
+      setTimeout(function(){ dica.classList.remove('on'); }, 7000);
+    }
+  }, 300);
 
   /* Os navegadores (principalmente Safari e Chrome no computador) só liberam o som depois do
      primeiro clique, toque ou tecla. Assim que isso acontece, a música começa na hora. */
@@ -869,7 +875,7 @@
     if (e && e.target && e.target.closest && e.target.closest('#nat-music')) { return; }
     if (ligada && !iniciada) { inicia(); }
     atualiza(); visual();
-    setTimeout(function(){ visual(); if (rodando()) { dica.classList.remove('on'); } }, 300);
+    setTimeout(visual, 300);
   }
   ['pointerdown','mousedown','click','keydown','touchstart','touchend'].forEach(function(ev){ document.addEventListener(ev, destrava, true); });
 
