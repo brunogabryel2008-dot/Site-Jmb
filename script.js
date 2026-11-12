@@ -713,6 +713,15 @@
     ['F',1],['F',1],['F',1.5],['F',.5], ['F',1],['E',1],['E',1],['E',.5],['E',.5], ['G',1],['G',1],['F',1],['D',1],['C',4]
   ];
 
+  /* MÚSICAS COMPLETAS (arquivos de áudio)
+     Coloque os arquivos .mp3 na pasta do site e liste os nomes aqui, na ordem em que devem tocar.
+     Cada música toca ATÉ O FIM e depois começa a próxima; ao acabar a lista, volta para a primeira.
+     Exemplo: var MUSICAS = ['noite-feliz.mp3', 'jingle-bells.mp3'];
+     Deixe vazio [] para usar a trilha de Natal gerada no navegador (versão curta). */
+  var MUSICAS = [];
+  var VOLUME_ARQ = 0.35;   /* volume das músicas em arquivo (0 a 1) */
+  var player = null, faixa = 0, erros = 0;
+
   var ctx = null, master = null, iniciada = false, ligada = true, pausaVideo = false, fim = 0;
   try { if (localStorage.getItem('jmb-natal-musica') === 'off') { ligada = false; } } catch (e) {}
 
@@ -765,8 +774,30 @@
     pad(t, t2 + 1);
     fim = t2 + 5;
   }
+  function iniciaArquivos(){
+    player = new Audio();
+    player.preload = 'auto';
+    player.volume = VOLUME_ARQ;
+    player.src = MUSICAS[faixa];
+    player.addEventListener('ended', function(){      /* terminou a música inteira: vem a próxima */
+      faixa = (faixa + 1) % MUSICAS.length;
+      player.src = MUSICAS[faixa];
+      var p = player.play(); if (p && p.catch) { p.catch(function(){}); }
+    });
+    player.addEventListener('error', function(){      /* arquivo não encontrado: pula; se nenhum abrir, usa a trilha gerada */
+      erros++;
+      if (erros >= MUSICAS.length) { player = null; MUSICAS = []; iniciada = false; inicia(); visual(); return; }
+      faixa = (faixa + 1) % MUSICAS.length;
+      player.src = MUSICAS[faixa];
+      var p = player.play(); if (p && p.catch) { p.catch(function(){}); }
+    });
+    player.addEventListener('playing', function(){ erros = 0; });
+    iniciada = true;
+    atualiza();
+  }
   function inicia(){
     if (iniciada) { return; }
+    if (MUSICAS.length) { iniciaArquivos(); return; }
     var AC = window.AudioContext || window.webkitAudioContext;
     if (!AC) { return; }
     ctx = new AC();
@@ -783,6 +814,12 @@
     atualiza();
   }
   function atualiza(){
+    if (player) {
+      var quer = ligada && !pausaVideo && !document.hidden;
+      if (quer && player.paused) { var pr = player.play(); if (pr && pr.catch) { pr.catch(function(){}); } }
+      if (!quer && !player.paused) { player.pause(); }
+      return;
+    }
     if (!ctx) { return; }
     var deve = ligada && !pausaVideo && !document.hidden;
     if (deve && ctx.state === 'suspended') { ctx.resume(); }
