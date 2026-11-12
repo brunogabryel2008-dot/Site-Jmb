@@ -5,9 +5,9 @@
    ===================================================== */
 .img.img-hero{ background-image:url('isadora.jpg'); background-position:center 40%; }       /* foto grande do topo */
 .img.img-sobre{ background-image:url('sobre.jpg'); background-position:center 35%; filter:none; }      /* foto da seção "Não é só sobre registrar" (colorida) */
-.img-port1{ background-image:url('portfolio-1.jpg'); background-position:center 35%; }      /* portfólio: foto grande */
+.img.img-port1{ background-image:url('portfolio-1.jpg'); background-position:center 35%; filter:none; }      /* portfólio: foto grande (colorida) */
 .img.img-port2{ background-image:url('Dagma.jpeg'); background-position:center 60%; filter:none; }      /* portfólio: pequena de cima (colorida) */
-.img-port3{ background-image:url('portfolio-3.jpg'); background-position:center 25%; }      /* portfólio: pequena de baixo */
+.img.img-port3{ background-image:url('portfolio-3.jpg'); background-position:center 25%; filter:none; }      /* portfólio: pequena de baixo (colorida) */
 
 /* =====================================================
    CORES E MEDIDAS
@@ -312,7 +312,7 @@ iframe.skiptranslate, .goog-te-banner-frame{ display:none !important; }
   .port-big{
     aspect-ratio:4/3;
   }
-  .img-port1{
+  .img.img-port1{
     background-position:55% 45%;
   }
 
@@ -320,7 +320,7 @@ iframe.skiptranslate, .goog-te-banner-frame{ display:none !important; }
   .port-small{
     aspect-ratio:4/5;
   }
-  .img-port3{
+  .img.img-port3{
     background-position:50% 0%;
   }
 
