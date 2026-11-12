@@ -3,7 +3,7 @@
 /* =====================================================
    SUAS IMAGENS: coloque os arquivos na pasta img/ com estes nomes
    ===================================================== */
-.img.img-hero{ background-image:url('hero.jpg?v=4'); background-position:center 40%; }       /* foto grande do topo */
+.img.img-hero{ background-image:url('isadora.jpg'); background-position:center 40%; }       /* foto grande do topo */
 .img.img-sobre{ background-image:url('sobre.jpg'); background-position:center 35%; filter:none; }      /* foto da seção "Não é só sobre registrar" (colorida) */
 .img-port1{ background-image:url('portfolio-1.jpg'); background-position:center 35%; }      /* portfólio: foto grande */
 .img.img-port2{ background-image:url('Dagma.jpeg'); background-position:center 60%; filter:none; }      /* portfólio: pequena de cima (colorida) */
