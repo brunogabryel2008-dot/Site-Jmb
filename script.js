@@ -574,29 +574,98 @@
   document.documentElement.className += ' anim-on';
 })();
 
+/* =====================================================
+   TEMA NATALINO — luzes, bokeh, neve fina e trilha
+   ===================================================== */
 (function(){
-  /* ---------- Pisca-pisca no cabeçalho ---------- */
+  var reduz = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var STAR = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1l1.8 8.2L22 11l-8.2 1.8L12 21l-1.8-8.2L2 11l8.2-1.8z"/></svg>';
+
+  /* ---------- Ornamentos entre as seções ---------- */
+  ['.sobre', '.pacotes', '.contato'].forEach(function(sel){
+    var s = document.querySelector(sel);
+    if (!s) { return; }
+    var o = document.createElement('div');
+    o.className = 'nat-orn';
+    o.innerHTML = '<span class="l"></span>' + STAR + '<span class="l"></span>';
+    s.insertBefore(o, s.firstChild);
+  });
+
+  /* ---------- Fio de luzes quentes no cabeçalho ---------- */
   var head = document.getElementById('header-wrap');
   if (head) {
     var box = document.createElement('div');
     box.className = 'nat-lights';
-    var cores = ['#ff4b4b','#ffd45c','#4be08a','#58b4ff'];
-    var n = Math.max(14, Math.round(window.innerWidth / 70));
+    var n = Math.max(16, Math.round(window.innerWidth / 56));
     for (var i = 0; i < n; i++) {
       var x = (i + .5) / n;
       var b = document.createElement('i');
-      b.style.left = (x * 100) + '%';
-      b.style.top = (Math.sin(x * Math.PI) * 6 + 2) + 'px';
-      b.style.background = cores[i % 4];
-      b.style.color = cores[i % 4];
-      b.style.animationDelay = ((i % 4) * .6) + 's';
+      b.style.left = 'calc(' + (x * 100) + '% - 2px)';
+      b.style.top = (Math.sin(x * Math.PI) * 5 + 2) + 'px';
+      b.style.animationDelay = (Math.random() * 3).toFixed(2) + 's';
       box.appendChild(b);
     }
     head.appendChild(box);
   }
 
-  /* ---------- Neve ---------- */
-  var reduz = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* ---------- Bokeh dourado no hero ---------- */
+  var hero = document.querySelector('.hero');
+  if (hero) {
+    var bc = document.createElement('canvas');
+    bc.id = 'nat-bokeh';
+    hero.insertBefore(bc, hero.firstChild);
+    var bx = bc.getContext('2d'), bw = 0, bh = 0, luzes = [], visivel = true;
+    var CORES = ['201,164,92', '236,217,168', '255,240,208', '201,164,92'];
+    function medeHero(){
+      var d = Math.min(window.devicePixelRatio || 1, 2);
+      bw = hero.clientWidth; bh = hero.clientHeight;
+      bc.width = bw * d; bc.height = bh * d;
+      bx.setTransform(d, 0, 0, d, 0, 0);
+    }
+    medeHero();
+    window.addEventListener('resize', medeHero);
+    var qtd = bw < 760 ? 12 : 22;
+    for (var k = 0; k < qtd; k++) {
+      luzes.push({
+        x: Math.random() * bw, y: Math.random() * bh,
+        r: 12 + Math.random() * 46,
+        a: .05 + Math.random() * .13,
+        c: CORES[k % CORES.length],
+        vy: .06 + Math.random() * .16,
+        o: Math.random() * Math.PI * 2, f: .004 + Math.random() * .008
+      });
+    }
+    function desenhaBokeh(){
+      bx.clearRect(0, 0, bw, bh);
+      for (var j = 0; j < luzes.length; j++) {
+        var l = luzes[j];
+        var pulso = .75 + .25 * Math.sin(l.o);
+        bx.beginPath(); bx.arc(l.x, l.y, l.r, 0, Math.PI * 2);
+        bx.fillStyle = 'rgba(' + l.c + ',' + (l.a * pulso).toFixed(3) + ')'; bx.fill();
+        bx.lineWidth = 1; bx.strokeStyle = 'rgba(' + l.c + ',' + (l.a * pulso * 1.8).toFixed(3) + ')'; bx.stroke();
+      }
+    }
+    function anda(){
+      if (visivel) {
+        for (var j = 0; j < luzes.length; j++) {
+          var l = luzes[j];
+          l.y -= l.vy; l.o += l.f; l.x += Math.sin(l.o) * .15;
+          if (l.y < -l.r) { l.y = bh + l.r; l.x = Math.random() * bw; }
+        }
+        desenhaBokeh();
+      }
+      requestAnimationFrame(anda);
+    }
+    if (reduz) { desenhaBokeh(); }
+    else {
+      if (window.IntersectionObserver) {
+        new IntersectionObserver(function(en){ visivel = en[0].isIntersecting; }).observe(hero);
+      }
+      anda();
+    }
+  }
+
+  /* ---------- Neve fina ---------- */
   if (!reduz) {
     var cv = document.createElement('canvas');
     cv.id = 'nat-snow';
@@ -610,56 +679,74 @@
     }
     ajusta();
     window.addEventListener('resize', ajusta);
-    var total = W < 760 ? 35 : 70;
-    for (var k = 0; k < total; k++) {
-      flocos.push({ x: Math.random() * W, y: Math.random() * H, r: Math.random() * 2.2 + .8, v: Math.random() * .7 + .3, o: Math.random() * Math.PI * 2 });
+    var total = W < 760 ? 24 : 46;
+    for (var q = 0; q < total; q++) {
+      flocos.push({ x: Math.random() * W, y: Math.random() * H, r: Math.random() * 1.3 + .5, v: Math.random() * .5 + .2, o: Math.random() * Math.PI * 2, a: .35 + Math.random() * .45 });
     }
     (function quadro(){
       cx.clearRect(0, 0, W, H);
-      cx.fillStyle = 'rgba(255,255,255,.85)';
       for (var j = 0; j < flocos.length; j++) {
         var f = flocos[j];
-        f.y += f.v; f.o += .01; f.x += Math.sin(f.o) * .4;
+        f.y += f.v; f.o += .008; f.x += Math.sin(f.o) * .3;
         if (f.y > H + 5) { f.y = -5; f.x = Math.random() * W; }
+        cx.fillStyle = 'rgba(255,255,255,' + f.a.toFixed(2) + ')';
         cx.beginPath(); cx.arc(f.x, f.y, f.r, 0, Math.PI * 2); cx.fill();
       }
       requestAnimationFrame(quadro);
     })();
   }
 
-  /* ---------- Musiquinha de Natal (gerada no navegador, sem arquivo de áudio) ---------- */
-  var VOLUME = 0.035;   /* bem baixinho. Aumente aqui se quiser (ex.: 0.06) */
+  /* ---------- Trilha de Natal (gerada no navegador, sem arquivo de áudio) ---------- */
+  var VOLUME = 0.04;   /* bem baixinho. Aumente aqui se quiser (ex.: 0.07) */
   var NOTAS = { C:261.63, D:293.66, E:329.63, F:349.23, G:392.00, A:440.00, B:493.88, C5:523.25, D5:587.33, E5:659.25, F5:698.46 };
-  /* Jingle Bells (tempo em batidas) */
-  var JINGLE = [
-    ['E',1],['E',1],['E',2], ['E',1],['E',1],['E',2], ['E',1],['G',1],['C',1.5],['D',.5],['E',4],
-    ['F',1],['F',1],['F',1.5],['F',.5], ['F',1],['E',1],['E',1],['E',.5],['E',.5], ['E',1],['D',1],['D',1],['E',1],['D',2],['G',2],
-    ['E',1],['E',1],['E',2], ['E',1],['E',1],['E',2], ['E',1],['G',1],['C',1.5],['D',.5],['E',4],
-    ['F',1],['F',1],['F',1.5],['F',.5], ['F',1],['E',1],['E',1],['E',.5],['E',.5], ['G',1],['G',1],['F',1],['D',1],['C',4]
-  ];
-  /* Noite Feliz (tempo em colcheias, convertido abaixo) */
-  var NOITE = [
+  var NOITE = [   /* Noite Feliz (tempo em colcheias) */
     ['G',3],['A',1],['G',2],['E',6], ['G',3],['A',1],['G',2],['E',6],
     ['D5',4],['D5',2],['B',6], ['C5',4],['C5',2],['G',6],
     ['A',4],['A',2],['C5',3],['B',1],['A',2], ['G',3],['A',1],['G',2],['E',6],
     ['A',4],['A',2],['C5',3],['B',1],['A',2], ['G',3],['A',1],['G',2],['E',6],
     ['D5',4],['D5',2],['F5',3],['D5',1],['B',2], ['C5',6],['G',3],['E',1],['G',2],['F',3],['D',3],['C',6]
   ];
+  var JINGLE = [  /* Jingle Bells (tempo em batidas) */
+    ['E',1],['E',1],['E',2], ['E',1],['E',1],['E',2], ['E',1],['G',1],['C',1.5],['D',.5],['E',4],
+    ['F',1],['F',1],['F',1.5],['F',.5], ['F',1],['E',1],['E',1],['E',.5],['E',.5], ['E',1],['D',1],['D',1],['E',1],['D',2],['G',2],
+    ['E',1],['E',1],['E',2], ['E',1],['E',1],['E',2], ['E',1],['G',1],['C',1.5],['D',.5],['E',4],
+    ['F',1],['F',1],['F',1.5],['F',.5], ['F',1],['E',1],['E',1],['E',.5],['E',.5], ['G',1],['G',1],['F',1],['D',1],['C',4]
+  ];
 
-  var ctx = null, master = null, iniciada = false, ligada = true, pausaVideo = false, timer = null;
+  var ctx = null, master = null, iniciada = false, ligada = true, pausaVideo = false, fim = 0;
   try { if (localStorage.getItem('jmb-natal-musica') === 'off') { ligada = false; } } catch (e) {}
 
-  function nota(freq, t, dur){
-    var o1 = ctx.createOscillator(), o2 = ctx.createOscillator(), g = ctx.createGain();
-    o1.type = 'sine'; o2.type = 'triangle';
-    o1.frequency.value = freq; o2.frequency.value = freq * 2;
-    var g2 = ctx.createGain(); g2.gain.value = .18;
-    o1.connect(g); o2.connect(g2); g2.connect(g); g.connect(master);
+  function reverb(){   /* sala suave: ruído que vai sumindo */
+    var len = Math.floor(ctx.sampleRate * 3.2), buf = ctx.createBuffer(2, len, ctx.sampleRate);
+    for (var c = 0; c < 2; c++) {
+      var d = buf.getChannelData(c);
+      for (var i = 0; i < len; i++) { d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 2.6); }
+    }
+    var cv2 = ctx.createConvolver(); cv2.buffer = buf; return cv2;
+  }
+  function nota(freq, t, dur){   /* timbre de celesta / caixinha de música */
+    var dec = Math.max(dur * 1.4, 1.1);
+    var g = ctx.createGain();
     g.gain.setValueAtTime(0, t);
-    g.gain.linearRampToValueAtTime(1, t + .02);
-    g.gain.exponentialRampToValueAtTime(.001, t + Math.max(dur, .5) * 1.5);
-    o1.start(t); o2.start(t);
-    o1.stop(t + dur * 1.5 + .1); o2.stop(t + dur * 1.5 + .1);
+    g.gain.linearRampToValueAtTime(1, t + .012);
+    g.gain.exponentialRampToValueAtTime(.001, t + dec);
+    g.connect(master);
+    var o1 = ctx.createOscillator(); o1.type = 'sine'; o1.frequency.value = freq; o1.connect(g);
+    var g2 = ctx.createGain(); g2.gain.setValueAtTime(.12, t); g2.gain.exponentialRampToValueAtTime(.001, t + .45); g2.connect(g);
+    var o2 = ctx.createOscillator(); o2.type = 'sine'; o2.frequency.value = freq * 4; o2.connect(g2);
+    o1.start(t); o2.start(t); o1.stop(t + dec + .05); o2.stop(t + dec + .05);
+  }
+  function pad(t0, t1){   /* base grave bem suave (quinta C + G) */
+    [130.81, 196.00].forEach(function(f){
+      var g = ctx.createGain();
+      g.gain.setValueAtTime(0, t0);
+      g.gain.linearRampToValueAtTime(.22, t0 + 2.5);
+      g.gain.setValueAtTime(.22, Math.max(t0 + 2.5, t1 - 2.5));
+      g.gain.linearRampToValueAtTime(0, t1);
+      g.connect(master);
+      var o = ctx.createOscillator(); o.type = 'sine'; o.frequency.value = f; o.connect(g);
+      o.start(t0); o.stop(t1 + .1);
+    });
   }
   function toca(lista, t0, seg){
     var t = t0;
@@ -669,11 +756,14 @@
     }
     return t;
   }
-  function ciclo(){
-    var t = ctx.currentTime + .3;
-    t = toca(JINGLE, t, .36) + 1.5;
-    t = toca(NOITE, t, .3) + 3;
-    timer = setTimeout(ciclo, (t - ctx.currentTime) * 1000);
+  function agenda(){
+    var t = Math.max(ctx.currentTime, fim) + .4;
+    var t1 = toca(NOITE, t, .38);
+    pad(t, t1 + 1);
+    t = t1 + 2.5;
+    var t2 = toca(JINGLE, t, .42);
+    pad(t, t2 + 1);
+    fim = t2 + 5;
   }
   function inicia(){
     if (iniciada) { return; }
@@ -681,13 +771,15 @@
     if (!AC) { return; }
     ctx = new AC();
     master = ctx.createGain(); master.gain.value = VOLUME;
-    var filtro = ctx.createBiquadFilter(); filtro.type = 'lowpass'; filtro.frequency.value = 2400;
-    var eco = ctx.createDelay(); eco.delayTime.value = .28;
-    var fb = ctx.createGain(); fb.gain.value = .3;
-    master.connect(filtro); filtro.connect(ctx.destination);
-    filtro.connect(eco); eco.connect(fb); fb.connect(eco); eco.connect(ctx.destination);
+    var filtro = ctx.createBiquadFilter(); filtro.type = 'lowpass'; filtro.frequency.value = 3200;
+    var seco = ctx.createGain(); seco.gain.value = .75;
+    var umido = ctx.createGain(); umido.gain.value = .55;
+    var rev = reverb();
+    master.connect(filtro); filtro.connect(seco); seco.connect(ctx.destination);
+    filtro.connect(rev); rev.connect(umido); umido.connect(ctx.destination);
     iniciada = true;
-    ciclo();
+    agenda();
+    setInterval(function(){ if (ctx.state === 'running' && ctx.currentTime > fim - 2) { agenda(); } }, 800);
     atualiza();
   }
   function atualiza(){
@@ -697,16 +789,15 @@
     if (!deve && ctx.state === 'running') { ctx.suspend(); }
   }
 
-  /* Botão */
   var btn = document.createElement('button');
   btn.id = 'nat-music'; btn.type = 'button';
   var dica = document.createElement('div');
-  dica.id = 'nat-music-dica'; dica.textContent = 'Toque para ouvir a música de Natal';
+  dica.id = 'nat-music-dica'; dica.textContent = 'Toque para ouvir a trilha de Natal';
   function visual(){
     var tocando = iniciada && ligada;
     btn.className = (tocando ? '' : 'off') + (!iniciada && ligada ? ' convite' : '');
     btn.innerHTML = '<i class="fa-solid ' + (tocando ? 'fa-music' : 'fa-volume-xmark') + '"></i>';
-    btn.setAttribute('aria-label', tocando ? 'Desligar música de Natal' : 'Ligar música de Natal');
+    btn.setAttribute('aria-label', tocando ? 'Desligar trilha de Natal' : 'Ligar trilha de Natal');
     btn.title = btn.getAttribute('aria-label');
   }
   btn.addEventListener('click', function(){

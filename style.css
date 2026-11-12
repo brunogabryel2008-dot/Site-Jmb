@@ -377,38 +377,64 @@ button.read-more:hover i{ transform:translateX(4px); }
   .pkg-panel .pk, .pkg-results .pk, .pkg-modal.open .pkg-backdrop, .pkg-modal.open .pkg-dialog{ animation:none; }
 }
 
-/* JMB — tema natalino (remova natal.css e natal.js do index.html para voltar ao normal) */
-:root{ --nat-red:#b3262d; --nat-red-dark:#8e1b22; --nat-green:#1f5b3a; --nat-gold:#e2c27a; }
+/* =====================================================
+   TEMA NATALINO — verde-floresta, dourado e luzes bokeh
+   (para remover depois do Natal: apague daqui até o fim do arquivo)
+   ===================================================== */
+:root{ --nat-green:#143d2b; --nat-green-deep:#0b1f16; --nat-gold:#c9a45c; --nat-gold-light:#ecd9a8; --nat-ivory:#f5ecd7; }
+::selection{ background:var(--nat-green); color:var(--nat-ivory); }
 
 /* Faixa de boas festas */
-.nat-banner{ background:linear-gradient(90deg,var(--nat-red-dark),var(--nat-red),var(--nat-red-dark)); color:#fff; text-align:center; font-size:12.5px; letter-spacing:1.4px; padding:9px 16px; line-height:1.4; }
-.nat-banner b{ font-weight:500; color:var(--nat-gold); }
+.nat-banner{ display:flex; align-items:center; justify-content:center; gap:16px; background:var(--nat-green-deep); color:var(--nat-gold-light); border-bottom:1px solid rgba(201,164,92,.45); text-align:center; font-size:11px; letter-spacing:2.4px; text-transform:uppercase; padding:11px 16px; line-height:1.5; }
+.nat-banner b{ font-weight:500; color:var(--nat-ivory); }
+.nat-banner svg{ width:10px; height:10px; fill:var(--nat-gold); flex:none; }
 
-/* Cabeçalho com fio dourado e pisca-pisca */
-#header-wrap{ border-bottom-color:rgba(226,194,122,.45) !important; }
-.nat-lights{ position:absolute; left:0; right:0; top:100%; height:26px; pointer-events:none; z-index:2; overflow:hidden; }
-.nat-lights:before{ content:''; position:absolute; left:-2%; right:-2%; top:-14px; height:22px; border-bottom:1.5px solid #3a3733; border-radius:0 0 50% 50% / 0 0 100% 100%; }
-.nat-lights i{ position:absolute; top:0; width:9px; height:13px; border-radius:50% 50% 55% 55%; animation:natPisca 2.4s ease-in-out infinite; }
-.nat-lights i:before{ content:''; position:absolute; left:2px; top:-4px; width:5px; height:5px; background:#3a3733; border-radius:1px; }
-@keyframes natPisca{ 0%,100%{ opacity:1; box-shadow:0 0 10px 2px currentColor; } 50%{ opacity:.35; box-shadow:0 0 3px 0 currentColor; } }
+/* Cabeçalho: fio dourado e pequenas luzes quentes */
+#header-wrap{ border-bottom:1px solid rgba(201,164,92,.5) !important; }
+.menu .btn-line:hover{ background:var(--nat-gold); border-color:var(--nat-gold); color:#111; }
+.nat-lights{ position:absolute; left:0; right:0; top:100%; height:22px; pointer-events:none; z-index:2; overflow:hidden; }
+.nat-lights:before{ content:''; position:absolute; left:-3%; right:-3%; top:-12px; height:18px; border-bottom:1px solid rgba(201,164,92,.45); border-radius:0 0 50% 50% / 0 0 100% 100%; }
+.nat-lights i{ position:absolute; width:5px; height:5px; border-radius:50%; background:#f6e3b0; color:#f6e3b0; box-shadow:0 0 8px 2px rgba(246,227,176,.55); animation:natBrilho 3.2s ease-in-out infinite; }
+@keyframes natBrilho{ 0%,100%{ opacity:1; } 50%{ opacity:.4; } }
 
-/* Detalhes de cor */
-.hero h2 em, .port h2 em{ color:var(--nat-gold); }
-.pkg-tab.active{ background:var(--nat-red) !important; }
-.menu .btn-line:hover{ background:var(--nat-red); border-color:var(--nat-red); color:#fff; }
+/* Hero: brilho quente, foto com tom dourado e luzes desfocadas (bokeh) */
+.hero{ position:relative; overflow:hidden; }
+.hero:before{ content:''; position:absolute; inset:0; z-index:0; pointer-events:none; background:radial-gradient(60% 55% at 88% 8%, rgba(201,164,92,.16), transparent 70%), radial-gradient(50% 45% at 4% 92%, rgba(20,61,43,.55), transparent 70%); }
+.hero > .wrap{ position:relative; z-index:2; }
+#nat-bokeh{ position:absolute; inset:0; width:100%; height:100%; z-index:1; pointer-events:none; mix-blend-mode:screen; }
+.hero .img.img-hero{ filter:grayscale(1) sepia(.38) saturate(1.15) brightness(.96); }
+.hero h2 em, .port h2 em{ background:linear-gradient(100deg,#ecd9a8 0%,#c9a45c 55%,#ecd9a8 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent; }
 .eyebrow:before{ background:var(--nat-gold); }
+.btn-white:hover{ border-color:var(--nat-gold); color:var(--nat-gold-light); }
 
-/* Neve */
+/* Ornamento entre seções */
+.sobre, .pacotes, .contato{ position:relative; }
+.nat-orn{ position:absolute; top:calc(var(--section) * .42); left:50%; transform:translateX(-50%); width:min(260px,56%); display:flex; align-items:center; gap:14px; pointer-events:none; }
+.nat-orn .l{ flex:1; height:1px; background:linear-gradient(90deg,transparent,var(--nat-gold)); }
+.nat-orn .l:last-child{ background:linear-gradient(90deg,var(--nat-gold),transparent); }
+.nat-orn svg{ width:13px; height:13px; fill:var(--nat-gold); flex:none; }
+
+/* Pacotes */
+.pkg-tab.active{ background:var(--nat-green) !important; color:var(--nat-ivory) !important; }
+.pk-top{ border-top:2px solid var(--nat-gold); }
+#footer-wrapper{ border-top:1px solid rgba(201,164,92,.4); }
+
+/* Neve fina */
 #nat-snow{ position:fixed; inset:0; width:100%; height:100%; pointer-events:none; z-index:45; }
 
 /* Botão da música */
-#nat-music{ position:fixed; left:16px; bottom:16px; z-index:60; width:52px; height:52px; border-radius:50%; border:1px solid rgba(255,255,255,.25); background:var(--nat-red); color:#fff; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:18px; box-shadow:0 10px 26px rgba(0,0,0,.3); transition:transform .25s ease, background-color .25s ease; }
-#nat-music:hover{ transform:translateY(-2px); background:var(--nat-red-dark); }
-#nat-music.off{ background:#3a3733; }
-#nat-music.convite{ animation:natConvite 2s ease-in-out infinite; }
-@keyframes natConvite{ 0%,100%{ box-shadow:0 0 0 0 rgba(179,38,45,.6); } 50%{ box-shadow:0 0 0 12px rgba(179,38,45,0); } }
-#nat-music-dica{ position:fixed; left:78px; bottom:26px; z-index:60; background:#fff; color:#111; font-size:12px; padding:8px 12px; border-radius:4px; box-shadow:0 6px 20px rgba(0,0,0,.2); opacity:0; transition:opacity .4s ease; pointer-events:none; }
+#nat-music{ position:fixed; left:16px; bottom:16px; z-index:60; width:52px; height:52px; border-radius:50%; border:1px solid var(--nat-gold); background:var(--nat-green); color:var(--nat-gold-light); cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:17px; box-shadow:0 10px 26px rgba(0,0,0,.3); transition:transform .25s ease, background-color .25s ease; }
+#nat-music:hover{ transform:translateY(-2px); background:var(--nat-green-deep); }
+#nat-music.off{ background:#1c1b19; border-color:#5a5650; color:#a9a298; }
+#nat-music.convite{ animation:natConvite 2.2s ease-in-out infinite; }
+@keyframes natConvite{ 0%,100%{ box-shadow:0 0 0 0 rgba(201,164,92,.55); } 50%{ box-shadow:0 0 0 12px rgba(201,164,92,0); } }
+#nat-music-dica{ position:fixed; left:78px; bottom:26px; z-index:60; background:var(--nat-ivory); color:#1c1b19; border:1px solid var(--nat-gold); font-size:11.5px; letter-spacing:.4px; padding:8px 12px; box-shadow:0 6px 20px rgba(0,0,0,.2); opacity:0; transition:opacity .4s ease; pointer-events:none; }
 #nat-music-dica.on{ opacity:1; }
 
 @media (prefers-reduced-motion:reduce){ .nat-lights i, #nat-music.convite{ animation:none; } }
-@media (max-width:760px){ .nat-banner{ font-size:11px; letter-spacing:.8px; } #nat-music{ left:12px; bottom:12px; width:48px; height:48px; } #nat-music-dica{ left:68px; bottom:22px; } }
+@media (max-width:760px){
+  .nat-banner{ font-size:9.5px; letter-spacing:1.4px; padding:9px 12px; }
+  .nat-banner svg:last-child{ display:none; }
+  #nat-music{ left:12px; bottom:12px; width:48px; height:48px; }
+  #nat-music-dica{ left:68px; bottom:22px; }
+}
