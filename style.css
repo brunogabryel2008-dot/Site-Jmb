@@ -1,30 +1,21 @@
-/* JMB FOTOS E VIDEOS - layout editorial preto e branco */
+.img.img-hero{ background-image:url('isadora.jpg'); background-position:center 40%; }
+.img.img-sobre{ background-image:url('sobre.jpg'); background-position:center 35%; filter:none; }
+.img.img-port1{ background-image:url('portfolio-1.jpg'); background-position:center 35%; filter:none; }
+.img.img-port2{ background-image:url('Dagma.jpeg'); background-position:center 60%; filter:none; }
+.img.img-port3{ background-image:url('portfolio-3.jpg'); background-position:center 25%; filter:none; }
 
-/* =====================================================
-   SUAS IMAGENS: coloque os arquivos na pasta img/ com estes nomes
-   ===================================================== */
-.img.img-hero{ background-image:url('isadora.jpg'); background-position:center 40%; }       /* foto grande do topo */
-.img.img-sobre{ background-image:url('sobre.jpg'); background-position:center 35%; filter:none; }      /* foto da seção "Não é só sobre registrar" (colorida) */
-.img.img-port1{ background-image:url('portfolio-1.jpg'); background-position:center 35%; filter:none; }      /* portfólio: foto grande (colorida) */
-.img.img-port2{ background-image:url('Dagma.jpeg'); background-position:center 60%; filter:none; }      /* portfólio: pequena de cima (colorida) */
-.img.img-port3{ background-image:url('portfolio-3.jpg'); background-position:center 25%; filter:none; }      /* portfólio: pequena de baixo (colorida) */
-
-/* =====================================================
-   CORES E MEDIDAS
-   Paleta preto e branco com um off-white levemente quente.
-   ===================================================== */
 :root{
   --black:#111010;
   --white:#ffffff;
-  --bg:#fdfbf8;          /* fundo das seções claras */
-  --paper:#f4efe7;       /* fundo da seção de pacotes e notas */
-  --gray:#8c857b;        /* textos de apoio */
-  --text:#4d4842;        /* texto corrido */
-  --line:#e6dfd4;        /* linhas finas no claro */
-  --line-dark:#2c2a27;   /* linhas finas no escuro */
-  --soft-dark:#c9c3ba;   /* texto claro sobre fundo preto */
+  --bg:#fdfbf8;
+  --paper:#f4efe7;
+  --gray:#8c857b;
+  --text:#4d4842;
+  --line:#e6dfd4;
+  --line-dark:#2c2a27;
+  --soft-dark:#c9c3ba;
   --max:1200px;
-  --section:clamp(88px,11vw,150px);   /* espaço vertical das seções */
+  --section:clamp(88px,11vw,150px);
 }
 *{ box-sizing:border-box; }
 html{ scroll-behavior:smooth; scroll-padding-top:76px; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
@@ -42,7 +33,6 @@ body{
 a{ color:inherit; }
 .wrap{ width:100%; max-width:var(--max); margin:0 auto; padding:0 32px; }
 
-/* Títulos em fonte normal; o itálico fica só no trecho em <em> */
 h1,h2,h3,h4,.serif{
   font-family:'Playfair Display',serif !important;
   font-style:normal;
@@ -53,16 +43,12 @@ h1,h2,h3,h4,.serif{
 }
 h1 em,h2 em,h3 em,h4 em{ font-style:italic; }
 
-/* Rótulo acima dos títulos, com um traço fino antes */
 .eyebrow{ display:flex; align-items:center; gap:14px; font-size:11.5px; letter-spacing:2.6px; text-transform:uppercase; font-weight:400; color:var(--gray); line-height:1.4; }
 .eyebrow:before{ content:''; width:28px; height:1px; background:currentColor; opacity:.7; flex:none; }
 .dark .eyebrow{ color:#a9a298; }
 .img{ background-color:#1b1b1b; background-size:cover; background-position:center; filter:grayscale(1); }
 .caption{ font-size:12px; color:var(--gray); letter-spacing:.3px; }
 
-/* =====================================================
-   BOTÕES: um só estilo — retos, em maiúsculas, com borda fina
-   ===================================================== */
 .btn-white, .menu .btn-line, .btn-line2, button.read-more, .pkg-cta, .header-search #search-submit{
   font-family:'Poppins',sans-serif;
   font-size:11.5px;
@@ -73,7 +59,6 @@ h1 em,h2 em,h3 em,h4 em{ font-style:italic; }
   line-height:1;
 }
 
-/* ---- Cabeçalho ---- */
 #header-wrap{ background:var(--black) !important; position:sticky; top:0; z-index:50; border-bottom:1px solid var(--line-dark); }
 .bar{ display:flex; align-items:center; justify-content:space-between; gap:24px; height:76px; }
 .bar .logo img{ height:44px; width:auto; display:block; }
@@ -84,7 +69,6 @@ h1 em,h2 em,h3 em,h4 em{ font-style:italic; }
 .menu .btn-line{ border:1px solid #5a5650; padding:14px 22px; color:var(--white); }
 .menu .btn-line:hover{ background:var(--white); color:var(--black); border-color:var(--white); }
 
-/* ---- Busca ---- */
 .header-search{ display:flex; }
 .header-search .search-form{ display:flex; align-items:center; background:var(--white); border:1px solid var(--line); border-radius:0; padding:4px 4px 4px 16px; width:100%; max-width:320px; }
 .header-search .search-form:focus-within{ border-color:var(--black); }
@@ -93,7 +77,6 @@ h1 em,h2 em,h3 em,h4 em{ font-style:italic; }
 .header-search .search-input::-webkit-search-cancel-button{ -webkit-appearance:none; }
 .header-search #search-submit{ background:var(--black); color:var(--white); border:none; padding:12px 18px; cursor:pointer; }
 
-/* ---- Hero ---- */
 .dark{ background:var(--black); color:var(--white); }
 .hero{ padding:clamp(56px,7vw,96px) 0 0; }
 .hero .eyebrow{ margin-bottom:28px; }
@@ -106,7 +89,6 @@ h1 em,h2 em,h3 em,h4 em{ font-style:italic; }
 .hero-cap{ display:flex; justify-content:space-between; padding:18px 0 28px; font-size:11px; letter-spacing:2px; color:#8f8980; text-transform:uppercase; }
 .hero-cap span:first-child{ text-transform:none; letter-spacing:.3px; }
 
-/* ---- Sobre ---- */
 .sobre{ padding:var(--section) 0; }
 .sobre-grid{ display:grid; grid-template-columns:1.25fr 1fr; gap:clamp(48px,7vw,104px); align-items:center; }
 .sobre h2{ font-size:clamp(34px,4.4vw,56px); line-height:1.12; margin:28px 0 32px; }
@@ -117,7 +99,6 @@ h1 em,h2 em,h3 em,h4 em{ font-style:italic; }
 .sobre-img{ aspect-ratio:4/5; width:100%; }
 .sobre .caption{ margin-top:14px !important; }
 
-/* ---- Pacotes ---- */
 .pacotes{ background:var(--paper); padding:var(--section) 0 calc(var(--section) * .7); }
 .pac-head{ display:flex; justify-content:space-between; align-items:flex-end; gap:40px; margin-bottom:48px; }
 .pac-head h2{ font-size:clamp(40px,5.6vw,72px); margin-top:24px; letter-spacing:-0.02em; }
@@ -142,7 +123,6 @@ h1 em,h2 em,h3 em,h4 em{ font-style:italic; }
 .pkg-panel.pkg-hide, .pkg-results.pkg-hide, .pkg-empty.pkg-hide{ display:none !important; }
 .pkg-empty{ font-size:15px; color:var(--text); margin:0 0 24px; }
 
-/* Cartões de pacote */
 .pk{ background:var(--white); border:1px solid var(--line); display:flex; flex-direction:column; }
 .pk-top{ background:var(--black); color:var(--white); padding:24px 26px 28px; min-height:160px; }
 .pk-top .row{ display:flex; justify-content:space-between; align-items:center; font-size:10.5px; letter-spacing:1.8px; text-transform:uppercase; color:#a9a298; margin-bottom:30px; }
@@ -159,7 +139,6 @@ h1 em,h2 em,h3 em,h4 em{ font-style:italic; }
 button.read-more{ display:flex; align-items:center; justify-content:space-between; width:100%; background:var(--black); color:var(--white); border:1px solid var(--black); padding:17px 20px; cursor:pointer; }
 button.read-more:hover{ background:var(--white); color:var(--black); }
 
-/* Pacote "Mais escolhido": cartão invertido (todo preto) com selo no topo */
 .pk{ position:relative; }
 .pk-badge{ position:absolute; top:-13px; left:26px; z-index:2; display:inline-flex; align-items:center; gap:7px; background:var(--white); color:var(--black); border:1px solid var(--black); padding:7px 12px; font-family:'Poppins',sans-serif; font-size:10px; font-weight:500; letter-spacing:1.8px; text-transform:uppercase; line-height:1; white-space:nowrap; }
 .pk-badge i{ font-size:9px; }
@@ -176,7 +155,6 @@ button.read-more:hover{ background:var(--white); color:var(--black); }
 .pac-foot{ display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; font-size:13.5px; color:var(--text); margin-top:44px; padding-top:24px; border-top:1px solid var(--line); }
 .pac-foot a{ font-weight:500; color:var(--black); text-underline-offset:4px; }
 
-/* ---- Portfólio ---- */
 .port{ padding:var(--section) 0 0; }
 .port-head{ display:flex; justify-content:space-between; align-items:flex-end; gap:40px; margin-bottom:52px; }
 .port-head h2{ font-size:clamp(38px,5vw,64px); line-height:1.08; letter-spacing:-0.02em; margin-top:24px; max-width:640px; color:var(--white); }
@@ -192,7 +170,6 @@ button.read-more:hover{ background:var(--white); color:var(--black); }
 .btn-line2{ border:1px solid #5a5650; padding:16px 24px; color:var(--white); text-decoration:none; }
 .btn-line2:hover{ background:var(--white); color:var(--black); border-color:var(--white); }
 
-/* ---- Contato ---- */
 .contato{ padding:var(--section) 0; }
 .contato-grid{ display:grid; grid-template-columns:1.25fr 1fr; gap:clamp(48px,7vw,104px); align-items:center; }
 .contato h2{ font-size:clamp(40px,5.6vw,72px); line-height:1.05; letter-spacing:-0.02em; margin:24px 0 30px; }
@@ -203,7 +180,6 @@ button.read-more:hover{ background:var(--white); color:var(--black); }
 .ct span{ font-size:13.5px; color:var(--gray); }
 .ct i{ font-size:20px; }
 
-/* ---- Rodapé ---- */
 #footer-wrapper{ background:var(--black) !important; color:var(--white); }
 .foot{ display:flex; justify-content:space-between; align-items:center; gap:24px; flex-wrap:wrap; padding:56px 0 32px; border-bottom:1px solid var(--line-dark); }
 .foot-brand{ display:flex; align-items:center; gap:18px; }
@@ -220,7 +196,6 @@ button.read-more:hover{ background:var(--white); color:var(--black); }
 .jmb-lang select{ background:transparent; color:var(--white); border:none; outline:none; font-family:'Poppins',sans-serif; font-size:12px; height:100%; cursor:pointer; max-width:100%; }
 .jmb-lang select option{ background:var(--black); color:var(--white); }
 
-/* ---- Janela "Saiba mais" ---- */
 .pkg-modal{ position:fixed; top:0; right:0; bottom:0; left:0; z-index:9999; display:none; align-items:center; justify-content:center; padding:16px; }
 .pkg-modal.open{ display:flex; }
 .pkg-backdrop{ position:absolute; top:0; right:0; bottom:0; left:0; background:rgba(17,16,16,.78); }
@@ -244,7 +219,6 @@ button.read-more:hover{ background:var(--white); color:var(--black); }
 .pkg-foto img{ display:block; width:100%; height:auto; max-height:62vh; object-fit:cover; object-position:center 35%; }
 .pkg-video.vertical{ aspect-ratio:9/16; max-height:60vh; width:auto; margin-left:auto; margin-right:auto; }
 
-/* ---- Botão flutuante do WhatsApp ---- */
 .wa-float{ position:fixed; right:24px; bottom:24px; z-index:60; display:flex; align-items:center; gap:0; height:60px; min-width:60px; padding:0 19px; background:var(--black); color:var(--white); text-decoration:none; border:1px solid rgba(255,255,255,.18); border-radius:40px; box-shadow:0 10px 30px rgba(0,0,0,.28); transition:gap .35s ease, transform .3s ease, background-color .3s ease; }
 .wa-float i{ font-size:24px; line-height:1; }
 .wa-float span{ max-width:0; overflow:hidden; white-space:nowrap; font-size:11.5px; font-weight:500; letter-spacing:1.8px; text-transform:uppercase; transition:max-width .4s ease; }
@@ -255,13 +229,11 @@ button.read-more:hover{ background:var(--white); color:var(--black); }
 @media (max-width:760px){ .wa-float{ right:16px; bottom:16px; height:56px; min-width:56px; padding:0 17px; } }
 @media (prefers-reduced-motion:reduce){ .wa-float:before{ animation:none; } }
 
-/* ---- Tradutor ---- */
 #google_translate_element{ position:absolute; left:-9999px; top:0; width:1px; height:1px; overflow:hidden; }
 iframe.skiptranslate, .goog-te-banner-frame{ display:none !important; }
 #goog-gt-tt, .goog-te-balloon-frame{ display:none !important; }
 .goog-text-highlight{ background:none !important; box-shadow:none !important; }
 
-/* ---- Responsivo ---- */
 @media (max-width:1100px){
   .pkg-panel[data-panel='videos']{ grid-template-columns:repeat(2,1fr); }
   .pkg-panel[data-panel='fotos'], .pkg-results, .pkg-group-grid{ grid-template-columns:repeat(2,1fr); }
@@ -293,14 +265,12 @@ iframe.skiptranslate, .goog-te-banner-frame{ display:none !important; }
   .port-side{ grid-template-columns:1fr; }
   .feat{ grid-template-columns:1fr; }
   .foot-social{ gap:24px; }
-  /* No celular, o pacote "Mais escolhido" aparece primeiro */
+
   .pkg-panel .pk-destaque{ order:-1; }
 }
 
-/* ---- Ajuste de enquadramento das fotos no celular ---- */
 @media (max-width:760px){
 
-  /* Remove alturas "esticadas" que cortavam a foto */
   .port-big,
   .port-small{
     height:auto;
@@ -308,7 +278,6 @@ iframe.skiptranslate, .goog-te-banner-frame{ display:none !important; }
     width:100%;
   }
 
-  /* Foto do casal (Encontros): formato mais baixo, sem ocupar a tela inteira */
   .port-big{
     aspect-ratio:4/3;
   }
@@ -316,7 +285,6 @@ iframe.skiptranslate, .goog-te-banner-frame{ display:none !important; }
     background-position:55% 45%;
   }
 
-  /* Foto do bolo (Tempo de celebrar): mostra o rosto e o bolo */
   .port-small{
     aspect-ratio:4/5;
   }
@@ -324,7 +292,6 @@ iframe.skiptranslate, .goog-te-banner-frame{ display:none !important; }
     background-position:50% 0%;
   }
 
-  /* Foto "Pequenos gestos" (Heitor): no formato original 3:4, aparece inteira, sem corte */
   .port-small.img-port2{
     aspect-ratio:3/4;
   }
@@ -333,24 +300,16 @@ iframe.skiptranslate, .goog-te-banner-frame{ display:none !important; }
   }
 }
 
-/* =====================================================
-   ANIMAÇÕES LEVES
-   ===================================================== */
-
-/* Elementos aparecem suavemente ao rolar a página
-   (só quando o JavaScript carregou, para nunca esconder conteúdo) */
 .anim-on .reveal{ opacity:0; transform:translateY(24px); transition:opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1); }
 .anim-on .reveal.visivel{ opacity:1; transform:none; }
 .anim-on .reveal.d1{ transition-delay:.12s; }
 .anim-on .reveal.d2{ transition-delay:.24s; }
 
-/* Cartões de pacote: sobem um pouco ao passar o mouse */
 .pk{ transition:transform .35s ease, box-shadow .35s ease, border-color .35s ease; }
 .pk:hover{ transform:translateY(-5px); box-shadow:0 18px 40px rgba(40,30,20,.10); border-color:#d6cdbf; }
 button.read-more, button.read-more i{ transition:background-color .3s ease, color .3s ease, transform .3s ease; }
 button.read-more:hover i{ transform:translateX(4px); }
 
-/* Cartões entram em sequência ao trocar de aba ou buscar */
 @keyframes jmbSobe{ from{ opacity:0; transform:translateY(16px); } to{ opacity:1; transform:none; } }
 .pkg-panel:not(.pkg-hide) .pk, .pkg-results:not(.pkg-hide) .pk{ animation:jmbSobe .55s cubic-bezier(.2,.7,.2,1) both; }
 .pkg-panel .pk:nth-child(2), .pkg-results .pk:nth-child(2){ animation-delay:.07s; }
@@ -358,38 +317,29 @@ button.read-more:hover i{ transform:translateX(4px); }
 .pkg-panel .pk:nth-child(4), .pkg-results .pk:nth-child(4){ animation-delay:.21s; }
 .pkg-panel .pk:nth-child(n+5), .pkg-results .pk:nth-child(n+5){ animation-delay:.28s; }
 
-/* Abas e botões: troca de cor suave */
 .pkg-tab, .menu a, .btn-white, .btn-line2, .ct, .foot-social a, .pkg-cta{ transition:background-color .3s ease, color .3s ease, border-color .3s ease, opacity .3s ease, transform .3s ease; }
 .btn-white i{ transition:transform .3s ease; }
 .btn-white:hover i{ transform:translateX(4px); }
 .ct:hover{ opacity:.6; }
 
-/* Janela "Saiba mais": abre com fade e leve zoom */
 @keyframes jmbFade{ from{ opacity:0; } to{ opacity:1; } }
 @keyframes jmbZoom{ from{ opacity:0; transform:translateY(14px) scale(.97); } to{ opacity:1; transform:none; } }
 .pkg-modal.open .pkg-backdrop{ animation:jmbFade .3s ease both; }
 .pkg-modal.open .pkg-dialog{ animation:jmbZoom .4s cubic-bezier(.2,.7,.2,1) both; }
 
-/* Quem prefere menos movimento no aparelho: sem animações */
 @media (prefers-reduced-motion:reduce){
   .anim-on .reveal{ opacity:1; transform:none; transition:none; }
   .pk, .pk:hover{ transform:none; }
   .pkg-panel .pk, .pkg-results .pk, .pkg-modal.open .pkg-backdrop, .pkg-modal.open .pkg-dialog{ animation:none; }
 }
 
-/* =====================================================
-   TEMA NATALINO — verde-floresta, dourado e luzes bokeh
-   (para remover depois do Natal: apague daqui até o fim do arquivo)
-   ===================================================== */
 :root{ --nat-green:#143d2b; --nat-green-deep:#0b1f16; --nat-gold:#c9a45c; --nat-gold-light:#ecd9a8; --nat-ivory:#f5ecd7; }
 ::selection{ background:var(--nat-green); color:var(--nat-ivory); }
 
-/* Faixa de boas festas */
 .nat-banner{ display:flex; align-items:center; justify-content:center; gap:16px; background:var(--nat-green-deep); color:var(--nat-gold-light); border-bottom:1px solid rgba(201,164,92,.45); text-align:center; font-size:11px; letter-spacing:2.4px; text-transform:uppercase; padding:11px 16px; line-height:1.5; }
 .nat-banner b{ font-weight:500; color:var(--nat-ivory); }
 .nat-banner svg{ width:10px; height:10px; fill:var(--nat-gold); flex:none; }
 
-/* Cabeçalho: fio dourado e pequenas luzes quentes */
 #header-wrap{ border-bottom:1px solid rgba(201,164,92,.5) !important; }
 .menu .btn-line:hover{ background:var(--nat-gold); border-color:var(--nat-gold); color:#111; }
 .nat-lights{ position:absolute; left:0; right:0; top:100%; height:22px; pointer-events:none; z-index:2; overflow:hidden; }
@@ -397,32 +347,27 @@ button.read-more:hover i{ transform:translateX(4px); }
 .nat-lights i{ position:absolute; width:5px; height:5px; border-radius:50%; background:#f6e3b0; color:#f6e3b0; box-shadow:0 0 8px 2px rgba(246,227,176,.55); animation:natBrilho 3.2s ease-in-out infinite; }
 @keyframes natBrilho{ 0%,100%{ opacity:1; } 50%{ opacity:.4; } }
 
-/* Hero: brilho quente, foto com tom dourado e luzes desfocadas (bokeh) */
 .hero{ position:relative; overflow:hidden; }
 .hero:before{ content:''; position:absolute; inset:0; z-index:0; pointer-events:none; background:radial-gradient(60% 55% at 88% 8%, rgba(201,164,92,.16), transparent 70%), radial-gradient(50% 45% at 4% 92%, rgba(20,61,43,.55), transparent 70%); }
 .hero > .wrap{ position:relative; z-index:2; }
 #nat-bokeh{ position:absolute; inset:0; width:100%; height:100%; z-index:1; pointer-events:none; mix-blend-mode:screen; }
-.hero .img.img-hero{ filter:none; }   /* foto colorida */
+.hero .img.img-hero{ filter:none; }
 .hero h2 em, .port h2 em{ background:linear-gradient(100deg,#ecd9a8 0%,#c9a45c 55%,#ecd9a8 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent; }
 .eyebrow:before{ background:var(--nat-gold); }
 .btn-white:hover{ border-color:var(--nat-gold); color:var(--nat-gold-light); }
 
-/* Ornamento entre seções */
 .sobre, .pacotes, .contato{ position:relative; }
 .nat-orn{ position:absolute; top:calc(var(--section) * .42); left:50%; transform:translateX(-50%); width:min(260px,56%); display:flex; align-items:center; gap:14px; pointer-events:none; }
 .nat-orn .l{ flex:1; height:1px; background:linear-gradient(90deg,transparent,var(--nat-gold)); }
 .nat-orn .l:last-child{ background:linear-gradient(90deg,var(--nat-gold),transparent); }
 .nat-orn svg{ width:13px; height:13px; fill:var(--nat-gold); flex:none; }
 
-/* Pacotes */
 .pkg-tab.active{ background:var(--nat-green) !important; color:var(--nat-ivory) !important; }
 .pk-top{ border-top:2px solid var(--nat-gold); }
 #footer-wrapper{ border-top:1px solid rgba(201,164,92,.4); }
 
-/* Neve fina */
 #nat-snow{ position:fixed; inset:0; width:100%; height:100%; pointer-events:none; z-index:45; }
 
-/* Botão da música */
 #nat-music{ position:fixed; left:16px; bottom:16px; z-index:60; width:52px; height:52px; border-radius:50%; border:1px solid var(--nat-gold); background:var(--nat-green); color:var(--nat-gold-light); cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:17px; box-shadow:0 10px 26px rgba(0,0,0,.3); transition:transform .25s ease, background-color .25s ease; }
 #nat-music:hover{ transform:translateY(-2px); background:var(--nat-green-deep); }
 #nat-music.off{ background:#1c1b19; border-color:#5a5650; color:#a9a298; }
@@ -431,21 +376,17 @@ button.read-more:hover i{ transform:translateX(4px); }
 #nat-music-dica{ position:fixed; left:78px; bottom:26px; z-index:60; background:var(--nat-ivory); color:#1c1b19; border:1px solid var(--nat-gold); font-size:11.5px; letter-spacing:.4px; padding:8px 12px; box-shadow:0 6px 20px rgba(0,0,0,.2); opacity:0; transition:opacity .4s ease; pointer-events:none; }
 #nat-music-dica.on{ opacity:1; }
 
-
 @media (max-width:760px){
   .nat-banner{ font-size:9.5px; letter-spacing:1.4px; padding:9px 12px; }
   .nat-banner svg:last-child{ display:none; }
   #nat-music{ left:12px; bottom:12px; width:48px; height:48px; }
   #nat-music-dica{ left:68px; bottom:22px; }
 }
-/* =====================================================
-   NATAL — PACOTES (cartões e janela "Saiba mais")
-   ===================================================== */
+
 :root{
   --nat-star:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23c9a45c' d='M12 1l1.8 8.2L22 11l-8.2 1.8L12 21l-1.8-8.2L2 11l8.2-1.8z'/%3E%3C/svg%3E");
 }
 
-/* ---- Cartões dos pacotes ---- */
 .pk{ transition:transform .35s ease, border-color .35s ease, box-shadow .35s ease; }
 .pk:hover{ transform:translateY(-4px); border-color:var(--nat-gold); box-shadow:0 14px 34px rgba(20,61,43,.16); }
 .pk-top{ background:linear-gradient(160deg,var(--nat-green) 0%,var(--nat-green-deep) 100%); position:relative; overflow:hidden; }
@@ -465,7 +406,6 @@ button.read-more:hover i{ transform:translateX(4px); }
 .pkg-tabs{ border-color:var(--nat-green); }
 .pkg-tab{ border-right-color:var(--nat-green); }
 
-/* ---- Janela "Saiba mais" ---- */
 .pkg-backdrop{ background:radial-gradient(70% 60% at 50% 40%, rgba(20,61,43,.72), rgba(7,18,13,.9)); }
 .pkg-dialog{
   background:var(--nat-ivory);
@@ -474,7 +414,7 @@ button.read-more:hover i{ transform:translateX(4px); }
   box-shadow:0 0 0 5px rgba(11,31,22,.55), 0 28px 70px rgba(0,0,0,.55);
   padding-top:58px;
 }
-/* fio de luzinhas no topo da janela */
+
 .pkg-dialog:before{
   content:''; position:absolute; left:0; right:0; top:0; height:26px; pointer-events:none;
   background:
@@ -482,7 +422,7 @@ button.read-more:hover i{ transform:translateX(4px); }
     linear-gradient(var(--nat-gold),var(--nat-gold)) 0 8px/100% 1px no-repeat;
   animation:natBrilho 3.2s ease-in-out infinite;
 }
-/* faixa verde com estrela, atrás do título */
+
 .pkg-dialog:after{
   content:''; position:absolute; left:0; right:0; top:26px; height:0; pointer-events:none;
 }
@@ -509,10 +449,6 @@ button.read-more:hover i{ transform:translateX(4px); }
 
 @media (max-width:640px){ .pkg-dialog{ padding-top:54px; } }
 
-
-/* =====================================================
-   NATAL — TELA DE ENTRADA (libera o som e inicia a música)
-   ===================================================== */
 #nat-entrada{ position:fixed; inset:0; z-index:10000; display:flex; align-items:center; justify-content:center; padding:24px; cursor:pointer; background:radial-gradient(70% 60% at 50% 35%, rgba(20,61,43,.96), rgba(7,18,13,.99)); transition:opacity .6s ease, visibility .6s ease; }
 #nat-entrada.saindo{ opacity:0; visibility:hidden; pointer-events:none; }
 #nat-entrada .ent-box{ text-align:center; max-width:460px; color:var(--nat-ivory); }

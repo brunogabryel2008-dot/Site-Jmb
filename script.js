@@ -1,28 +1,17 @@
 (function(){
-  /* WhatsApp: número com DDI + DDD, só dígitos */
+
   var WHATS = '5561998328852';
   function linkWhats(msg){ return 'https://wa.me/' + WHATS + '?text=' + encodeURIComponent(msg); }
 
-  /* =====================================================
-     VÍDEOS DOS PACOTES
-     Cole o link do player entre aspas.
-     Para vídeo em pé (vertical), use: { url:'LINK', vertical:true }
-     Deixe '' (vazio) para o pacote ficar sem vídeo.
-     ===================================================== */
   var VIDEOS = {
     'foto-essencial': 'https://www.youtube.com/embed/qbkj1ZG38Js',
     'foto-completo': 'https://www.youtube.com/embed/XHiwF2DHyRk',
     'vid-simples': 'https://www.youtube.com/embed/PHlJLSCs6PA',
     'vid-padrao': 'https://www.youtube.com/embed/fasuw7Wn3fU',
     'vid-essencial': 'https://www.youtube.com/embed/kk_zBGqnRMc'
-    /* 'vid-duplo': '', */
+
   };
 
-  /* =====================================================
-     FOTOS DOS PACOTES
-     Nome do arquivo da foto (na mesma pasta do site).
-     A foto aparece na janela "Saiba mais", logo abaixo do preço.
-     ===================================================== */
   var FOTOS = {
     'foto-mini': 'heitor.jpeg'
   };
@@ -33,7 +22,6 @@
     return '<div class="pkg-foto"><img src="' + f + '" alt="Exemplo do pacote" loading="lazy"></div>';
   }
 
-  /* ---- Player do YouTube: sem controles + volume mínimo 50% ---- */
   var VOLUME_MINIMO = 50;
   var ytAtual = null;
   var ytFila = [];
@@ -103,7 +91,7 @@
     if (!v || v.indexOf('COLE_AQUI') === 0) { return ''; }
     var vertical = false;
     if (typeof v === 'object') { vertical = !!v.vertical; v = v.url; }
-    /* Arquivo de video proprio (ex.: 'videos/essencial.mp4'): toca dentro do site em qualquer situacao */
+
     if (/\.(mp4|webm|mov)(\?.*)?$/i.test(v)) {
       return '<div class="pkg-video' + (vertical ? ' vertical' : '') + '">'
         + '<video src="' + v + '" controls autoplay playsinline preload="metadata" '
@@ -112,8 +100,6 @@
     var ehYT = /youtube\.com\/embed|youtube-nocookie\.com\/embed/.test(v);
     var online = /^https?:$/.test(location.protocol);
 
-    /* Aberto direto do computador (file://): o YouTube bloqueia o player (erro 153).
-       Mostramos um botao para assistir no YouTube. Online (GitHub Pages) o player funciona. */
     if (ehYT && !online) {
       var idm = v.match(/embed\/([\w-]{6,})/);
       var link = idm ? 'https://www.youtube.com/watch?v=' + idm[1] : v;
@@ -151,10 +137,8 @@
     + 'Orçamento válido por 7 dias.<br/><br/>'
     + 'Para um trabalho de excelência, informe com antecedência onde, quando e qual pacote.';
 
-  /* Aviso que aparece em todos os pacotes (cartão e "Saiba mais") */
   var AVISO_DIAS = 'Entregas em dias úteis';
 
-  /* Grupos da aba StoryMakers (na ordem em que aparecem) */
   var GRUPOS = [
     { id:'qualquer', titulo:'Qualquer tipo de evento' },
     { id:'civil', titulo:'Casamento civil' },
@@ -211,7 +195,6 @@
       'Entrega do vídeo do evento em até 20 dias',
       'Ideal para casamentos, aniversários e eventos corporativos' ] },
 
-    /* ---- StoryMakers: qualquer tipo de evento ---- */
     'st-qualquer-inicial': { cat:'stories', grupo:'qualquer', nome:'Pacote Inicial', preco:'R$380,00', itens:[
       'Duração: até 3 horas',
       'Entregas: stories em tempo real do seu evento no Instagram',
@@ -230,7 +213,6 @@
       'Fora da cidade: taxa de R$2,00 por km',
       'Prazo de entrega: 1 dia útil' ] },
 
-    /* ---- StoryMakers: casamento civil ---- */
     'st-civil-inicial': { cat:'stories', grupo:'civil', nome:'Pacote Inicial', preco:'R$390,00', itens:[
       'Duração: 1 hora',
       'Entregas: stories em tempo real',
@@ -251,7 +233,6 @@
       'Fora da cidade: taxa de R$2,00 por km',
       'Prazo de entrega: 3 dias úteis' ] },
 
-    /* ---- StoryMakers: eventos ---- */
     'st-eventos-video': { cat:'stories', grupo:'eventos', nome:'Videomaker Mobile', preco:'R$500,00', itens:[
       '1 vídeo editado com os melhores momentos',
       'Duração: até 5 horas' ] },
@@ -263,7 +244,6 @@
       'Stories em tempo real',
       'Horário a combinar' ] },
 
-    /* ---- StoryMakers: infantil ---- */
     'st-infantil-video': { cat:'stories', grupo:'infantil', nome:'Videomaker Mobile', preco:'R$400,00', itens:[
       '1 vídeo editado com os melhores momentos' ] },
     'st-infantil-story': { cat:'stories', grupo:'infantil', nome:'Storymaker', preco:'R$430,00', itens:[
@@ -273,7 +253,6 @@
       'Stories em tempo real' ] }
   };
 
-  /* Textos curtos que aparecem nos cartões */
   var EXTRA = {
     'foto-mini': { sub:'Para registrar o essencial', res:['10 fotos editadas','2 looks à escolha','Galeria online privada','Entrega em até 48h'], ideal:'Ideal para ensaios rápidos e registros do dia a dia.' },
     'foto-essencial': { sub:'Fotos e um toque de movimento', res:['15 fotos tratadas','Filmaker de 50 seg','3 looks à escolha','Entrega em até 72h'], ideal:'Ideal para ensaios completos e conteúdo para redes.' },
@@ -297,10 +276,6 @@
     'st-infantil-kids': { sub:'Vídeo + stories', res:['1 vídeo melhores momentos','Stories em tempo real'], ideal:'Ideal para festas infantis.' }
   };
 
-  /* =====================================================
-     PACOTES MAIS ESCOLHIDOS
-     Coloque aqui o código dos pacotes que levam o selo "Mais escolhido".
-     ===================================================== */
   var DESTAQUES = ['foto-essencial', 'vid-padrao'];
   var SELO = 'Mais escolhido';
 
@@ -324,7 +299,6 @@
       + '<button class="read-more" data-pkg="' + k + '" type="button">Saiba mais <i class="fa-solid fa-arrow-right"></i></button></div></div>';
   }
 
-  /* ---- Monta os cartões nas abas ---- */
   var abas = document.querySelectorAll('.pkg-tab');
   var paineis = document.querySelectorAll('.pkg-panel');
   var pFotos = document.querySelector('.pkg-panel[data-panel="fotos"]');
@@ -354,7 +328,6 @@
     pStories.innerHTML = hs;
   }
 
-  /* ---- Abas Fotos / Vídeos ---- */
   function trocarAba(nome){
     var i;
     for (i = 0; i < abas.length; i++) {
@@ -368,7 +341,6 @@
     }
   }
 
-  /* ---- Janela Saiba mais ---- */
   var modal = document.getElementById('pkg-modal');
   var corpo = document.getElementById('pkg-modal-body');
   if (!modal || !corpo) { return; }
@@ -423,7 +395,6 @@
     document.body.style.overflow = '';
   }
 
-  /* ---- Busca de pacotes ---- */
   var formBusca = document.querySelector('.header-search .search-form');
   var campoBusca = formBusca ? formBusca.querySelector('.search-input') : null;
   var resultados = document.getElementById('pkg-results');
@@ -538,12 +509,10 @@
   });
 })();
 
-/* ---- Animações leves: elementos aparecem ao rolar a página ---- */
 (function(){
   if (!('IntersectionObserver' in window)) { return; }
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) { return; }
 
-  /* [seletor, atraso] — atraso 1 ou 2 deixa os itens entrando em sequência */
   var ALVOS = [
     ['.hero .eyebrow', 0], ['.hero-top h2', 0], ['.hero-side', 1], ['.hero-img', 2], ['.hero-cap', 2],
     ['.sobre-grid > div:first-child', 0], ['.sobre-grid > div:last-child', 1],
@@ -574,18 +543,12 @@
   document.documentElement.className += ' anim-on';
 })();
 
-/* =====================================================
-   TEMA NATALINO — luzes, bokeh, neve fina e trilha
-   ===================================================== */
 (function(){
-  /* Neve e luzes são bem suaves. Muitos Macs/PCs têm "Reduzir movimento" ligado no sistema,
-     o que desligava tudo no computador. Por isso aqui ele é ignorado.
-     Troque para true se quiser respeitar essa opção do sistema. */
+
   var RESPEITAR_MOVIMENTO_REDUZIDO = false;
   var reduz = RESPEITAR_MOVIMENTO_REDUZIDO && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var STAR = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1l1.8 8.2L22 11l-8.2 1.8L12 21l-1.8-8.2L2 11l8.2-1.8z"/></svg>';
 
-  /* ---------- Ornamentos entre as seções ---------- */
   ['.sobre', '.pacotes', '.contato'].forEach(function(sel){
     var s = document.querySelector(sel);
     if (!s) { return; }
@@ -595,7 +558,6 @@
     s.insertBefore(o, s.firstChild);
   });
 
-  /* ---------- Fio de luzes quentes no cabeçalho ---------- */
   var head = document.getElementById('header-wrap');
   if (head) {
     var box = document.createElement('div');
@@ -612,7 +574,6 @@
     head.appendChild(box);
   }
 
-  /* ---------- Bokeh dourado no hero ---------- */
   var hero = document.querySelector('.hero');
   if (hero) {
     var bc = document.createElement('canvas');
@@ -669,7 +630,6 @@
     }
   }
 
-  /* ---------- Neve fina ---------- */
   if (!reduz) {
     var cv = document.createElement('canvas');
     cv.id = 'nat-snow';
@@ -700,36 +660,30 @@
     })();
   }
 
-  /* ---------- Trilha de Natal (gerada no navegador, sem arquivo de áudio) ---------- */
-  var VOLUME = 0.07;   /* baixinho, mas audível no celular. Ajuste aqui se quiser (0.04 = bem baixo, 0.10 = mais alto) */
+  var VOLUME = 0.07;
   var NOTAS = { C:261.63, D:293.66, E:329.63, F:349.23, G:392.00, A:440.00, B:493.88, C5:523.25, D5:587.33, E5:659.25, F5:698.46 };
-  var NOITE = [   /* Noite Feliz (tempo em colcheias) */
+  var NOITE = [
     ['G',3],['A',1],['G',2],['E',6], ['G',3],['A',1],['G',2],['E',6],
     ['D5',4],['D5',2],['B',6], ['C5',4],['C5',2],['G',6],
     ['A',4],['A',2],['C5',3],['B',1],['A',2], ['G',3],['A',1],['G',2],['E',6],
     ['A',4],['A',2],['C5',3],['B',1],['A',2], ['G',3],['A',1],['G',2],['E',6],
     ['D5',4],['D5',2],['F5',3],['D5',1],['B',2], ['C5',6],['G',3],['E',1],['G',2],['F',3],['D',3],['C',6]
   ];
-  var JINGLE = [  /* Jingle Bells (tempo em batidas) */
+  var JINGLE = [
     ['E',1],['E',1],['E',2], ['E',1],['E',1],['E',2], ['E',1],['G',1],['C',1.5],['D',.5],['E',4],
     ['F',1],['F',1],['F',1.5],['F',.5], ['F',1],['E',1],['E',1],['E',.5],['E',.5], ['E',1],['D',1],['D',1],['E',1],['D',2],['G',2],
     ['E',1],['E',1],['E',2], ['E',1],['E',1],['E',2], ['E',1],['G',1],['C',1.5],['D',.5],['E',4],
     ['F',1],['F',1],['F',1.5],['F',.5], ['F',1],['E',1],['E',1],['E',.5],['E',.5], ['G',1],['G',1],['F',1],['D',1],['C',4]
   ];
 
-  /* MÚSICAS COMPLETAS (arquivos de áudio)
-     Coloque os arquivos .mp3 na pasta do site e liste os nomes aqui, na ordem em que devem tocar.
-     Cada música toca ATÉ O FIM e depois começa a próxima; ao acabar a lista, volta para a primeira.
-     Exemplo: var MUSICAS = ['noite-feliz.mp3', 'jingle-bells.mp3'];
-     Deixe vazio [] para usar a trilha de Natal gerada no navegador (versão curta). */
   var MUSICAS = [];
-  var VOLUME_ARQ = 0.35;   /* volume das músicas em arquivo (0 a 1) */
+  var VOLUME_ARQ = 0.35;
   var player = null, faixa = 0, erros = 0;
 
   var ctx = null, master = null, iniciada = false, ligada = true, pausaVideo = false, fim = 0;
   try { if (localStorage.getItem('jmb-natal-musica') === 'off') { ligada = false; } } catch (e) {}
 
-  function reverb(){   /* sala suave: ruído que vai sumindo */
+  function reverb(){
     var len = Math.floor(ctx.sampleRate * 3.2), buf = ctx.createBuffer(2, len, ctx.sampleRate);
     for (var c = 0; c < 2; c++) {
       var d = buf.getChannelData(c);
@@ -737,7 +691,7 @@
     }
     var cv2 = ctx.createConvolver(); cv2.buffer = buf; return cv2;
   }
-  function nota(freq, t, dur){   /* timbre de celesta / caixinha de música */
+  function nota(freq, t, dur){
     var dec = Math.max(dur * 1.4, 1.1);
     var g = ctx.createGain();
     g.gain.setValueAtTime(0, t);
@@ -749,7 +703,7 @@
     var o2 = ctx.createOscillator(); o2.type = 'sine'; o2.frequency.value = freq * 4; o2.connect(g2);
     o1.start(t); o2.start(t); o1.stop(t + dec + .05); o2.stop(t + dec + .05);
   }
-  function pad(t0, t1){   /* base grave bem suave (quinta C + G) */
+  function pad(t0, t1){
     [130.81, 196.00].forEach(function(f){
       var g = ctx.createGain();
       g.gain.setValueAtTime(0, t0);
@@ -783,12 +737,12 @@
     player.preload = 'auto';
     player.volume = VOLUME_ARQ;
     player.src = MUSICAS[faixa];
-    player.addEventListener('ended', function(){      /* terminou a música inteira: vem a próxima */
+    player.addEventListener('ended', function(){
       faixa = (faixa + 1) % MUSICAS.length;
       player.src = MUSICAS[faixa];
       var p = player.play(); if (p && p.catch) { p.catch(function(){}); }
     });
-    player.addEventListener('error', function(){      /* arquivo não encontrado: pula; se nenhum abrir, usa a trilha gerada */
+    player.addEventListener('error', function(){
       erros++;
       if (erros >= MUSICAS.length) { player = null; MUSICAS = []; iniciada = false; inicia(); visual(); return; }
       faixa = (faixa + 1) % MUSICAS.length;
@@ -820,9 +774,7 @@
     setInterval(function(){ if (ctx.state === 'running' && ctx.currentTime > fim - 2) { agenda(); } }, 800);
     atualiza();
   }
-  /* Celular: o iPhone deixa o Web Audio mudo com o botão lateral no silencioso e só libera o som
-     depois de um toque. Um áudio mudo em loop (tocado no primeiro toque) troca a sessão de áudio para
-     "reprodução" e faz a música sair mesmo assim. */
+
   var mudo = null;
   function criaMudo(){
     try {
@@ -832,7 +784,7 @@
       v.setUint16(20, 1, true); v.setUint16(22, 1, true); v.setUint32(24, 8000, true);
       v.setUint32(28, 8000, true); v.setUint16(32, 1, true); v.setUint16(34, 8, true);
       t(36, 'data'); v.setUint32(40, n, true);
-      for (var i = 0; i < n; i++) { b[44 + i] = 128; }   /* 128 = silêncio em 8 bits */
+      for (var i = 0; i < n; i++) { b[44 + i] = 128; }
       mudo = new Audio(URL.createObjectURL(new Blob([b], { type:'audio/wav' })));
       mudo.loop = true; mudo.setAttribute('playsinline', '');
     } catch (e) { mudo = null; }
@@ -854,7 +806,7 @@
     var deve = ligada && !pausaVideo && !document.hidden;
     if (deve) { destravaCelular(); }
     else if (mudo && !mudo.paused) { mudo.pause(); }
-    /* 'interrupted' é o estado do iPhone depois de bloquear a tela ou receber ligação */
+
     if (deve && ctx.state !== 'running' && ctx.state !== 'closed') {
       var rp = ctx.resume(); if (rp && rp.catch) { rp.catch(function(){}); }
     }
@@ -866,7 +818,7 @@
   var dica = document.createElement('div');
   dica.id = 'nat-music-dica'; dica.textContent = 'Toque para silenciar a música';
   function rodando(){ return player ? !player.paused : !!(ctx && ctx.state === 'running'); }
-  function esperando(){ return ligada && iniciada && !pausaVideo && !document.hidden && !rodando(); }   /* navegador ainda não liberou o som */
+  function esperando(){ return ligada && iniciada && !pausaVideo && !document.hidden && !rodando(); }
   function visual(){
     var tocando = iniciada && ligada;
     btn.className = (tocando ? '' : 'off') + ((!iniciada && ligada) || esperando() ? ' convite' : '');
@@ -884,9 +836,9 @@
   document.body.appendChild(btn);
   document.body.appendChild(dica);
   visual();
-  /* Tenta tocar assim que o site abre. */
+
   if (ligada) { inicia(); visual(); }
-  /* O aviso só aparece quando a música JÁ está tocando, para a pessoa poder silenciar. */
+
   var dicaJa = false;
   var dicaTimer = setInterval(function(){
     if (!dicaJa && ligada && rodando()) {
@@ -897,7 +849,6 @@
     }
   }, 300);
 
-  /* ---------- Tela de entrada: o clique em "Entrar" libera o som e a música começa na hora ---------- */
   if (ligada) {
     var logoEl = document.querySelector('.bar .logo img');
     var tela = document.createElement('div');
@@ -929,8 +880,6 @@
     if (eb && eb.focus) { try { eb.focus({ preventScroll:true }); } catch (e) {} }
   }
 
-  /* Os navegadores (principalmente Safari e Chrome no computador) só liberam o som depois do
-     primeiro clique, toque ou tecla. Assim que isso acontece, a música começa na hora. */
   function destrava(e){
     if (e && e.target && e.target.closest && e.target.closest('#nat-music')) { return; }
     if (ligada && !iniciada) { inicia(); }
@@ -939,7 +888,6 @@
   }
   ['pointerdown','pointerup','mousedown','mouseup','click','keydown','touchstart','touchend'].forEach(function(ev){ document.addEventListener(ev, destrava, true); });
 
-  /* Pausa ao trocar de aba e enquanto a janela "Saiba mais" (com vídeo) está aberta */
   document.addEventListener('visibilitychange', atualiza);
   window.addEventListener('pageshow', atualiza);
   window.addEventListener('focus', atualiza);
